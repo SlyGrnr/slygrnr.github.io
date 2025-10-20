@@ -1,156 +1,90 @@
-/* === GENERAL === */
-body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  color: white;
-  text-align: center;
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/* === NAVIGATION === */
+/* Body */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: #ffffff;
+    line-height: 1.6;
+}
+
+/* Header */
+header {
+    text-align: center;
+    padding: 30px 10px;
+    background: linear-gradient(to right, #1f4037, #99f2c8);
+}
+
+header h1 {
+    font-size: 2.5em;
+}
+
+header p {
+    font-size: 1.2em;
+}
+
+/* Navegación */
 nav {
-  background: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(6px);
-  padding: 15px;
-  position: sticky;
-  top: 0;
-  z-index: 100;
+    background-color: #1f1f1f;
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    list-style: none;
+}
+
+nav li {
+    margin: 10px 20px;
 }
 
 nav a {
-  color: white;
-  text-decoration: none;
-  margin: 0 20px;
-  font-weight: 600;
-  transition: color 0.3s;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
 }
 
 nav a:hover {
-  color: #00c3ff;
+    color: #99f2c8;
 }
 
-/* === HERO SECTION === */
-.hero {
-  background-image: url('BANNER.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
+/* Secciones */
+.section {
+    background-color: #282828;
+    padding: 30px 20px;
+    margin: 20px auto;
+    max-width: 900px;
+    border-radius: 10px;
 }
 
-.hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.5);
+.section h2 {
+    margin-bottom: 15px;
+    color: #99f2c8;
 }
 
-.hero-content {
-  position: relative;
-  z-index: 1;
-  max-width: 90%;
-  padding: 20px;
+.section p {
+    font-size: 1em;
 }
 
-.hero h1 {
-  font-size: 3em;
-  margin-bottom: 0.5em;
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #1f1f1f;
+    color: #888888;
 }
 
-.hero p {
-  font-size: 1.3em;
-  margin-bottom: 20px;
-}
-
-/* === BOTÓN DEL HERO === */
-.hero .btn {
-  background: #00c3ff;
-  color: #141E30;
-  padding: 15px 35px;
-  border-radius: 30px;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 1.1em;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-  transition: all 0.3s;
-}
-
-.hero .btn:hover {
-  background: white;
-  transform: scale(1.05);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
-}
-
-/* === APK GRID === */
-.apk-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 30px;
-  margin-top: 50px;
-  padding: 0 20px;
-}
-
-.apk-card {
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 20px;
-  padding: 30px;
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.apk-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 25px rgba(0,0,0,0.4);
-}
-
-.apk-card img {
-  width: 90px;
-  height: 90px;
-  margin-bottom: 15px;
-  border-radius: 25%;
-}
-
-.apk-card h3 {
-  color: #00c3ff;
-  margin-bottom: 10px;
-}
-
-.apk-card p {
-  font-size: 0.95em;
-  margin-bottom: 20px;
-}
-
-.apk-card .btn {
-  background: #00c3ff;
-  color: #141E30;
-  padding: 10px 25px;
-  border-radius: 25px;
-  font-weight: 600;
-  text-decoration: none;
-  transition: all 0.3s;
-}
-
-.apk-card .btn:hover {
-  background: white;
-  transform: scale(1.05);
-}
-
-/* === CONTACT === */
-#contact a {
-  color: #00c3ff;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-#contact a:hover {
-  text-decoration: underline;
-}
-
-/* === RESPONSIVE === */
-@media (max-width: 768px) {
-  .hero h1 { font-size: 2em; }
-  .hero p { font-size: 1em; }
-  section { padding: 60px 15px; }
+/* Responsive */
+@media (max-width: 600px) {
+    header h1 { font-size: 2em; }
+    header p { font-size: 1em; }
+    nav ul { flex-direction: column; }
+    nav li { margin: 5px 0; }
+    .section { padding: 20px 10px; }
 }
