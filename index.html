@@ -34,14 +34,15 @@
       <button class="filter-btn" data-category="tools">Tools</button>
       <button class="filter-btn" data-category="modding">Modding</button>
       <button class="filter-btn" data-category="games">Games</button>
+      <button class="filter-btn" data-category="games">Pc</button>
     </div>
 
     <!-- === APK GRID === -->
     <div class="apk-grid">
-      <div class="apk-card" data-category="tools">
+      <div class="apk-card" data-category="Pc Games">
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8MeIuet-6TkGhvYjhC-aI97L1xJslh3ZI_g&s" alt="Asassins Creed icon">
-        <h3>Asassins Creed</h3>
-        <p>el mejor juego de todo el mundo.</p>
+        <h3>Assassin's Creed</h3>
+        <p>Assassin's Creed es una serie de videojuegos, historietas, libros, y cortos de ficción histórica. Los videojuegos son de acción-aventura, sigilo y de mundo abierto o lineal.</p>
         <a href="https://drive.google.com/file/d/1k63MVtw_g3LIB94TSG1xzBncz3rPGaJe/view?usp=sharing" target="_blank" class="btn">Download</a>
       </div>
 
@@ -108,6 +109,8 @@
         const category = button.dataset.category;
 
         apkCards.forEach(card => {
+          const categories = card.dataset.category.split(" ");
+          
           if (category === 'all' || card.dataset.category === category) {
             card.style.display = 'block';
           } else {
