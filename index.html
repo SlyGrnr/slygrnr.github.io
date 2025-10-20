@@ -1,46 +1,156 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShowX - Herramientas y Proyectos</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+/* === GENERAL === */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  color: white;
+  text-align: center;
+}
 
-<header>
-    <h1>ShowX</h1>
-    <p>Tu espacio digital para Android, proyectos y creatividad</p>
-</header>
+/* === NAVIGATION === */
+nav {
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(6px);
+  padding: 15px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
 
-<nav>
-    <ul>
-        <li><a href="#apks">Android APKs 📱</a></li>
-        <li><a href="#proyectos">Proyectos</a></li>
-        <li><a href="#contacto">Contacto</a></li>
-    </ul>
-</nav>
+nav a {
+  color: white;
+  text-decoration: none;
+  margin: 0 20px;
+  font-weight: 600;
+  transition: color 0.3s;
+}
 
-<main>
-    <section id="apks" class="section">
-        <h2>Android APKs 📱</h2>
-        <p>Explora herramientas, mods y apps útiles para Android.</p>
-    </section>
+nav a:hover {
+  color: #00c3ff;
+}
 
-    <section id="proyectos" class="section">
-        <h2>Proyectos</h2>
-        <p>Descubre nuestros proyectos creativos y tecnológicos.</p>
-    </section>
+/* === HERO SECTION === */
+.hero {
+  background-image: url('BANNER.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
 
-    <section id="contacto" class="section">
-        <h2>Contacto</h2>
-        <p>Escríbenos y conéctate con ShowX.</p>
-    </section>
-</main>
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+}
 
-<footer>
-    <p>© 2025 ShowX - Todos los derechos reservados</p>
-</footer>
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 90%;
+  padding: 20px;
+}
 
-</body>
-</html>
+.hero h1 {
+  font-size: 3em;
+  margin-bottom: 0.5em;
+}
+
+.hero p {
+  font-size: 1.3em;
+  margin-bottom: 20px;
+}
+
+/* === BOTÓN DEL HERO === */
+.hero .btn {
+  background: #00c3ff;
+  color: #141E30;
+  padding: 15px 35px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1em;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  transition: all 0.3s;
+}
+
+.hero .btn:hover {
+  background: white;
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+}
+
+/* === APK GRID === */
+.apk-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  margin-top: 50px;
+  padding: 0 20px;
+}
+
+.apk-card {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 30px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.apk-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.4);
+}
+
+.apk-card img {
+  width: 90px;
+  height: 90px;
+  margin-bottom: 15px;
+  border-radius: 25%;
+}
+
+.apk-card h3 {
+  color: #00c3ff;
+  margin-bottom: 10px;
+}
+
+.apk-card p {
+  font-size: 0.95em;
+  margin-bottom: 20px;
+}
+
+.apk-card .btn {
+  background: #00c3ff;
+  color: #141E30;
+  padding: 10px 25px;
+  border-radius: 25px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.apk-card .btn:hover {
+  background: white;
+  transform: scale(1.05);
+}
+
+/* === CONTACT === */
+#contact a {
+  color: #00c3ff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+#contact a:hover {
+  text-decoration: underline;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  .hero h1 { font-size: 2em; }
+  .hero p { font-size: 1em; }
+  section { padding: 60px 15px; }
+}
