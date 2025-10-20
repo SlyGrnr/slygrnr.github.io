@@ -1,12 +1,12 @@
 /* === GENERAL === */
 body {
-  background: linear-gradient(135deg, #141E30, #243B55);
-  color: white;
-  font-family: 'Segoe UI', sans-serif;
   margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  color: white;
   text-align: center;
 }
 
+/* === NAVIGATION === */
 nav {
   background: rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(6px);
@@ -14,7 +14,6 @@ nav {
   position: sticky;
   top: 0;
   z-index: 100;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 
 nav a {
@@ -29,78 +28,69 @@ nav a:hover {
   color: #00c3ff;
 }
 
-/* === HERO === */
+/* === HERO SECTION === */
 .hero {
-  background: url("https://images.unsplash.com/photo-1527443154391-507e9dc6c5cc?auto=format&fit=crop&w=1400&q=80") no-repeat center center/cover;
+  background-image: url('BANNER.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
   position: relative;
-  overflow: hidden;
 }
 
 .hero::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(3px);
+  background: rgba(0,0,0,0.5);
 }
 
 .hero-content {
   position: relative;
-  z-index: 2;
-  max-width: 700px;
+  z-index: 1;
+  max-width: 90%;
   padding: 20px;
-  animation: fadeIn 2s ease;
 }
 
 .hero h1 {
-  font-size: 2.8em;
-  line-height: 1.2;
-}
-
-.hero h1 span {
-  color: #00c3ff;
+  font-size: 3em;
+  margin-bottom: 0.5em;
 }
 
 .hero p {
-  font-size: 1.2em;
-  margin: 20px 0 30px;
-  opacity: 0.9;
+  font-size: 1.3em;
+  margin-bottom: 20px;
 }
 
-/* === BUTTON === */
-.btn {
-  display: inline-block;
+/* === BOTÓN DEL HERO === */
+.hero .btn {
   background: #00c3ff;
   color: #141E30;
-  padding: 12px 28px;
-  border-radius: 25px;
+  padding: 15px 35px;
+  border-radius: 30px;
   text-decoration: none;
   font-weight: 600;
+  font-size: 1.1em;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
   transition: all 0.3s;
 }
 
-.btn:hover {
+.hero .btn:hover {
   background: white;
   transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
 }
 
-/* === SECTIONS === */
-section {
-  padding: 100px 20px;
-  max-width: 1200px;
-  margin: auto;
-}
-
+/* === APK GRID === */
 .apk-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 30px;
   margin-top: 50px;
+  padding: 0 20px;
 }
 
 .apk-card {
@@ -132,6 +122,22 @@ section {
   margin-bottom: 20px;
 }
 
+.apk-card .btn {
+  background: #00c3ff;
+  color: #141E30;
+  padding: 10px 25px;
+  border-radius: 25px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.apk-card .btn:hover {
+  background: white;
+  transform: scale(1.05);
+}
+
+/* === CONTACT === */
 #contact a {
   color: #00c3ff;
   text-decoration: none;
@@ -140,12 +146,6 @@ section {
 
 #contact a:hover {
   text-decoration: underline;
-}
-
-/* === ANIMATION === */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
 }
 
 /* === RESPONSIVE === */
