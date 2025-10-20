@@ -1,0 +1,29 @@
+body {
+  background: linear-gradient(to right, #141E30, #243B55);
+  color: white;
+  text-align: center;
+  font-family: 'Segoe UI', sans-serif;
+  margin-top: 10%;
+}
+h1 {
+  font-size: 3em;
+}
+p {
+  font-size: 1.2em;
+  margin-top: 10px;
+}
+nav {
+  background: rgba(255,255,255,0.1);
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 40px;
+}
+a {
+  color: #99f2c8;
+  text-decoration: none;
+  margin: 0 15px;
+  font-weight: bold;
+}
+a:hover {
+  text-decoration: underline;
+}
