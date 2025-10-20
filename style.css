@@ -7,6 +7,7 @@ body {
   text-align: center;
 }
 
+/* === NAVIGATION === */
 nav {
   background: rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(6px);
@@ -82,6 +83,7 @@ nav a:hover {
   text-decoration: none;
   font-weight: 600;
   transition: all 0.3s;
+  animation: pulse 2s infinite;
 }
 
 .btn:hover {
@@ -89,13 +91,25 @@ nav a:hover {
   transform: scale(1.05);
 }
 
-/* === SECTIONS === */
-section {
-  padding: 100px 20px;
-  max-width: 1200px;
-  margin: auto;
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
 }
 
+/* === SECTIONS === */
+section {
+  background: rgba(20, 30, 48, 0.9); /* fondo oscuro */
+  padding: 100px 20px;
+  max-width: 1200px;
+  margin: 50px auto;
+  border-radius: 15px;
+}
+
+section h2, section p {
+  color: white; /* texto legible */
+}
+
+/* === APK GRID === */
 .apk-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -104,7 +118,7 @@ section {
 }
 
 .apk-card {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 20px;
   padding: 30px;
   transition: transform 0.3s, box-shadow 0.3s;
@@ -132,6 +146,7 @@ section {
   margin-bottom: 20px;
 }
 
+/* === CONTACT === */
 #contact a {
   color: #00c3ff;
   text-decoration: none;
@@ -142,7 +157,7 @@ section {
   text-decoration: underline;
 }
 
-/* === ANIMATION === */
+/* === ANIMATIONS === */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
@@ -153,4 +168,5 @@ section {
   .hero h1 { font-size: 2em; }
   .hero p { font-size: 1em; }
   section { padding: 60px 15px; }
+  nav a { display: inline-block; margin: 10px; }
 }
