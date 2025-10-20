@@ -1,82 +1,97 @@
+/* === General === */
 body {
-  background: linear-gradient(to right, #141E30, #243B55);
+  background: linear-gradient(135deg, #141E30, #243B55);
   color: white;
   font-family: 'Segoe UI', sans-serif;
   margin: 0;
   text-align: center;
 }
 
+/* === Navigation === */
 nav {
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(6px);
   padding: 15px;
   position: sticky;
   top: 0;
   z-index: 100;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 
 nav a {
   color: white;
   text-decoration: none;
-  margin: 0 15px;
-  font-weight: bold;
+  margin: 0 20px;
+  font-weight: 600;
   transition: color 0.3s;
 }
 
 nav a:hover {
-  color: #66ccff;
+  color: #00c3ff;
 }
 
+/* === Sections === */
 section {
-  padding: 80px 20px;
+  padding: 100px 20px;
+  max-width: 1200px;
+  margin: auto;
 }
 
 h1, h2 {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
+}
+
+p {
+  line-height: 1.6;
+  max-width: 700px;
+  margin: auto;
 }
 
 /* === APK GRID === */
 .apk-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-  margin-top: 40px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  margin-top: 50px;
 }
 
 .apk-card {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.08);
   border-radius: 20px;
-  padding: 25px;
-  width: 280px;
+  padding: 30px;
   transition: transform 0.3s, box-shadow 0.3s;
-  text-align: center;
 }
 
 .apk-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.4);
 }
 
 .apk-card img {
-  width: 80px;
-  height: 80px;
+  width: 90px;
+  height: 90px;
   margin-bottom: 15px;
-  border-radius: 20%;
+  border-radius: 25%;
 }
 
 .apk-card h3 {
-  color: #66ccff;
+  color: #00c3ff;
   margin-bottom: 10px;
+}
+
+.apk-card p {
+  font-size: 0.95em;
+  margin-bottom: 20px;
 }
 
 .btn {
   display: inline-block;
-  background: #66ccff;
+  background: #00c3ff;
   color: #141E30;
-  padding: 10px 20px;
+  padding: 10px 25px;
   border-radius: 25px;
   text-decoration: none;
-  font-weight: bold;
+  font-weight: 600;
   transition: background 0.3s, transform 0.2s;
 }
 
@@ -85,7 +100,25 @@ h1, h2 {
   transform: scale(1.05);
 }
 
-/* Contact section */
-a {
-  color: #66ccff;
+/* === Contact Section === */
+#contact a {
+  color: #00c3ff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+#contact a:hover {
+  text-decoration: underline;
+}
+
+/* === Responsive tweaks === */
+@media (max-width: 768px) {
+  nav a {
+    display: inline-block;
+    margin: 10px;
+  }
+
+  section {
+    padding: 60px 15px;
+  }
 }
