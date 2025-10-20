@@ -11,6 +11,7 @@ nav {
   padding: 15px;
   position: sticky;
   top: 0;
+  z-index: 100;
 }
 
 nav a {
@@ -18,10 +19,11 @@ nav a {
   text-decoration: none;
   margin: 0 15px;
   font-weight: bold;
+  transition: color 0.3s;
 }
 
 nav a:hover {
-  text-decoration: underline;
+  color: #66ccff;
 }
 
 section {
@@ -32,6 +34,58 @@ h1, h2 {
   margin-bottom: 15px;
 }
 
+/* === APK GRID === */
+.apk-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.apk-card {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 25px;
+  width: 280px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  text-align: center;
+}
+
+.apk-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+.apk-card img {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 15px;
+  border-radius: 20%;
+}
+
+.apk-card h3 {
+  color: #66ccff;
+  margin-bottom: 10px;
+}
+
+.btn {
+  display: inline-block;
+  background: #66ccff;
+  color: #141E30;
+  padding: 10px 20px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.btn:hover {
+  background: white;
+  transform: scale(1.05);
+}
+
+/* Contact section */
 a {
   color: #66ccff;
 }
