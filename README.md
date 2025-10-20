@@ -1,2 +1,2 @@
 # slygrnr.github.io
-ShowX — conecta ideas, personas y experiencias.
+ShowX — connecting ideas, people and experiences.
