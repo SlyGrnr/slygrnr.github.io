@@ -141,6 +141,30 @@ h2 {
   color: #00d8ff;
 }
 
+/* === SEARCH BAR === */
+.search-bar {
+  margin-bottom: 2rem;
+}
+
+.search-bar input {
+  padding: 10px;
+  width: 100%;
+  max-width: 400px;
+  border: none;
+  border-radius: 5px;
+  background-color: #222;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.search-bar input::placeholder {
+  color: #ccc;
+}
+
+.search-bar input:focus {
+  outline: 2px solid #00d8ff;
+}
+
 /* === FILTER BUTTONS === */
 .apk-filters {
   display: flex;
@@ -188,7 +212,17 @@ h2 {
   max-width: 300px;
   text-align: center;
   box-shadow: 0 0 15px rgba(0,0,0,0.4);
-  transition: transform 0.3s, box-shadow 0.3s;
+  transition: transform 0.3s, box-shadow 0.3s, opacity 0.3s;
+}
+
+.apk-card:not([style*="display: block"]) {
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+.apk-card[style*="display: block"] {
+  opacity: 1;
+  transform: scale(1);
 }
 
 .apk-card:hover {
@@ -300,5 +334,8 @@ footer {
   }
   .hero-content h1 {
     font-size: 2rem;
+  }
+  .search-bar input {
+    max-width: 100%;
   }
 }
