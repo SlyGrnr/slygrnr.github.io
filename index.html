@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ShowX: Download Android APKs, tools, mods, and stay updated with the latest news.">
   <title>ShowX - Connecting Ideas</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
@@ -37,8 +38,13 @@
 <!-- === APK SECTION === -->
 <section id="apks">
   <div class="container">
-    <h2>ANDROID APKS 📱</h2>
+    <h2>ANDROID APKs 📱</h2>
     <p>Explore Android tools, custom mods, and useful apps for development and creativity.</p>
+  
+    <!-- === SEARCH BAR === -->
+    <div class="search-bar">
+      <input type="text" id="search-input" placeholder="Search APKs..." aria-label="Search APKs">
+    </div>
   
     <!-- === CATEGORY FILTERS === -->
     <div class="apk-filters">
@@ -133,11 +139,13 @@
   <p>&copy; 2025 ShowX. All rights reserved.</p>
 </footer>
 
-<!-- === JS FILTER === -->
+<!-- === JS FILTER AND SEARCH === -->
 <script>
   const filterButtons = document.querySelectorAll('.filter-btn');
   const apkCards = document.querySelectorAll('.apk-card');
+  const searchInput = document.querySelector('#search-input');
 
+  // Filtrado por categoría
   filterButtons.forEach(button => {
     button.addEventListener('click', () => {
       filterButtons.forEach(btn => btn.classList.remove('active'));
@@ -154,6 +162,25 @@
         }
       });
     });
+  });
+
+  // Búsqueda en tiempo real
+  searchInput.addEventListener('input', () => {
+    const searchTerm = searchInput.value.toLowerCase();
+
+    apkCards.forEach(card => {
+      const title = card.querySelector('h3').textContent.toLowerCase();
+      const description = card.querySelector('p').textContent.toLowerCase();
+      const matchesSearch = title.includes(searchTerm) || description.includes(searchTerm);
+
+      // Mostrar solo las tarjetas que coincidan con la búsqueda
+      card.style.display = matchesSearch ? 'block' : 'none';
+    });
+
+    // Si hay un término de búsqueda, desactivar el filtrado por categoría
+    if (searchTerm) {
+      filterButtons.forEach(btn => btn.classList.remove('active'));
+    }
   });
 </script>
 </body>
