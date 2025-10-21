@@ -44,6 +44,11 @@ nav a:hover {
   color: #00d8ff;
 }
 
+.logo img {
+  height: 40px; /* Ajusta según el tamaño de tu logo */
+  width: auto;
+}
+
 /* === DROPDOWN MENU === */
 .dropdown {
   position: relative;
@@ -143,18 +148,18 @@ h2 {
 
 /* === SEARCH BAR === */
 .search-bar {
-  margin-bottom: 2rem;
+  margin-bottom: 3rem; /* Aumentado para más separación */
 }
 
 .search-bar input {
-  padding: 10px;
+  padding: 11.5px; /* Aumentado 1.5px (~2mm) */
   width: 100%;
   max-width: 400px;
   border: none;
   border-radius: 5px;
   background-color: #222;
   color: #fff;
-  font-size: 1rem;
+  font-size: 1.1rem; /* Aumentado 1.5px (~2mm) */
 }
 
 .search-bar input::placeholder {
@@ -337,5 +342,10 @@ footer {
   }
   .search-bar input {
     max-width: 100%;
+    font-size: 1rem; /* Ajustado para móviles */
+    padding: 10px; /* Ajustado para móviles */
+  }
+  .logo img {
+    height: 30px; /* Tamaño más pequeño para móviles */
   }
 }
