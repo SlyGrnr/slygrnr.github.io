@@ -4,15 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ShowX - Connecting Ideas</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <!-- === NAVIGATION === -->
 <nav>
   <a href="#home">HOME</a>
-
   <div class="dropdown">
-    <a href="#categorias" class="dropbtn">CATEGORÍAS ▾</a>
+    <a href="#categorias" class="dropbtn" aria-label="Menú de categorías">CATEGORÍAS ▾</a>
     <div class="dropdown-content">
       <a href="#tools">TOOLS</a>
       <a href="#modding">MODS</a>
@@ -20,21 +20,23 @@
       <a href="#pc">PC</a>
     </div>
   </div>
-
+  <a href="#news">NEWS</a>
+  <a href="#contact">CONTACT</a>
   <a href="#support">SUPPORT ME</a>
 </nav>
 
-  <!-- === HERO SECTION === -->
-  <header id="home" class="hero">
-    <div class="hero-content">
-      <h1>Welcome to <span>ShowX</span> 🚀</h1>
-      <p>Connecting ideas, people, and experiences.</p>
-      <a href="#apks" class="btn">Explore APKs</a>
-    </div>
-  </header>
+<!-- === HERO SECTION === -->
+<header id="home" class="hero">
+  <div class="hero-content">
+    <h1>Welcome to <span>ShowX</span> 🚀</h1>
+    <p>Connecting ideas, people, and experiences.</p>
+    <a href="#apks" class="btn">Explore APKs</a>
+  </div>
+</header>
 
-  <!-- === APK SECTION === -->
-  <section id="apks">
+<!-- === APK SECTION === -->
+<section id="apks">
+  <div class="container">
     <h2>ANDROID APKS 📱</h2>
     <p>Explore Android tools, custom mods, and useful apps for development and creativity.</p>
   
@@ -57,65 +59,102 @@
       </div>
   
       <div class="apk-card" data-category="tools">
-        <img src="https://cdn-icons-png.flaticon.com/512/814/814513.png" alt="Analyzer icon">
+        <img src="https://cdn-icons-png.flaticon.com/512/814/814513.png" alt="Ícono de APK Analyzer">
         <h3>APK ANALYZER</h3>
         <p>Analiza y descompila APKs fácilmente desde tu PC.</p>
         <a href="#" target="_blank" class="btn">DOWNLOAD</a>
       </div>
   
       <div class="apk-card" data-category="tools modding">
-        <img src="https://cdn-icons-png.flaticon.com/512/814/814513.png" alt="Builder icon">
+        <img src="https://cdn-icons-png.flaticon.com/512/814/814513.png" alt="Ícono de APK Builder">
         <h3>APK BUILDER PRO</h3>
         <p>Compila, firma y modifica APKs personalizadas para desarrolladores.</p>
         <a href="#" target="_blank" class="btn">DOWNLOAD</a>
       </div>
   
       <div class="apk-card" data-category="modding">
-        <img src="https://cdn-icons-png.flaticon.com/512/906/906343.png" alt="Mod icon">
+        <img src="https://cdn-icons-png.flaticon.com/512/906/906343.png" alt="Ícono de Game Modder">
         <h3>GAME MODDER</h3>
         <p>Edita y crea modificaciones personalizadas para juegos Android.</p>
         <a href="#" target="_blank" class="btn">DOWNLOAD</a>
       </div>
   
       <div class="apk-card" data-category="games">
-        <img src="https://cdn-icons-png.flaticon.com/512/906/906343.png" alt="Game icon">
+        <img src="https://cdn-icons-png.flaticon.com/512/906/906343.png" alt="Ícono de Retro Emulator">
         <h3>RETRO EMULATOR</h3>
         <p>Emulador clásico con controles personalizados y guardado de partidas.</p>
         <a href="#" target="_blank" class="btn">DOWNLOAD</a>
       </div>
   
       <div class="apk-card" data-category="pc tools">
-        <img src="https://cdn-icons-png.flaticon.com/512/2721/2721244.png" alt="Toolbox icon">
+        <img src="https://cdn-icons-png.flaticon.com/512/2721/2721244.png" alt="Ícono de PC Toolbox">
         <h3>PC TOOLBOX</h3>
         <p>Kit de herramientas todo-en-uno para optimizar tu PC y gestionar APKs.</p>
         <a href="#" target="_blank" class="btn">DOWNLOAD</a>
       </div>
     </div>
-  </section>
-  
-  <!-- === JS FILTER === -->
-  <script>
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    const apkCards = document.querySelectorAll('.apk-card');
-  
-    filterButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        // Quita "active" de todos los botones
-        filterButtons.forEach(btn => btn.classList.remove('active'));
-        button.classList.add('active');
-  
-        const category = button.dataset.category;
-  
-        apkCards.forEach(card => {
-          const categories = card.dataset.category.split(" ");
-          if (category === 'all' || categories.includes(category)) {
-            card.style.display = 'block';
-          } else {
-            card.style.display = 'none';
-          }
-        });
+  </div>
+</section>
+
+<!-- === NEWS SECTION === -->
+<section id="news">
+  <div class="container">
+    <h2>Latest News 📰</h2>
+    <p>Stay updated with the latest announcements, APK releases, and tips for developers.</p>
+    <div class="news-grid">
+      <div class="news-card">
+        <h3>Coming Soon: New Tools</h3>
+        <p>We're working on exciting new tools for Android development. Stay tuned!</p>
+      </div>
+      <div class="news-card">
+        <h3>APK Update v2.0</h3>
+        <p>Updated versions of popular APKs with improved performance.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- === CONTACT SECTION === -->
+<section id="contact">
+  <div class="container">
+    <h2>Contact Us 📬</h2>
+    <p>Have questions or suggestions? Reach out to us!</p>
+    <form class="contact-form">
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea placeholder="Your Message" required></textarea>
+      <button type="submit" class="btn">Send Message</button>
+    </form>
+  </div>
+</section>
+
+<!-- === FOOTER === -->
+<footer>
+  <p>&copy; 2025 ShowX. All rights reserved.</p>
+</footer>
+
+<!-- === JS FILTER === -->
+<script>
+  const filterButtons = document.querySelectorAll('.filter-btn');
+  const apkCards = document.querySelectorAll('.apk-card');
+
+  filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      filterButtons.forEach(btn => btn.classList.remove('active'));
+      button.classList.add('active');
+
+      const category = button.dataset.category;
+
+      apkCards.forEach(card => {
+        const categories = card.dataset.category.split(" ");
+        if (category === 'all' || categories.includes(category)) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
       });
     });
-  </script>
+  });
+</script>
 </body>
 </html>
