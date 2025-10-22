@@ -6,7 +6,7 @@
   <meta name="description" content="ShowX: Download Android APKs, tools, mods, and stay updated with the latest news.">
   <title>ShowX - Connecting Ideas</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="icon" href="LOGO.png" type="image/jpeg">
+  <link rel="icon" href="LOGO.png" type="image/png">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -42,8 +42,8 @@
 <!-- === APK SECTION === -->
 <section id="apks">
   <div class="container">
-    <h2>ANDROID📱</h2>
-    <p>APKS,  MODS, ISOS, PELICULAS, PROGRAMAS LINKS UTILES Y MAS.</p>
+    <h2>ANDROID 📱</h2>
+    <p>APKS, MODS, ISOS, PELICULAS, PROGRAMAS LINKS UTILES Y MAS.</p>
   
     <!-- === SEARCH BAR === -->
     <div class="search-bar">
@@ -63,44 +63,72 @@
     <div class="apk-grid">
       <div class="apk-card" data-category="games pc">
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8MeIuet-6TkGhvYjhC-aI97L1xJslh3ZI_g&s" alt="Assassin's Creed icon">
+        <div class="apk-tags">
+          <span class="tag">Juego</span>
+          <span class="tag">PC</span>
+        </div>
         <h3>ASSASSIN'S CREED</h3>
         <p>Serie de videojuegos de acción-aventura y sigilo ambientada en mundos históricos y abiertos.</p>
-        <a href="https://drive.google.com/file/d/1k63MVtw_g3LIB94TSG1xzBncz3rPGaJe/view?usp=sharing" target="_blank" class="btn">DOWNLOAD</a>
+        <div class="apk-rating">⭐ 4.8/5</div>
+        <a href="https://drive.google.com/file/d/1k63MVtw_g3LIB94TSG1xzBncz3rPGaJe/view?usp=sharing" target="_blank" class="btn" tabindex="0">DOWNLOAD</a>
       </div>
   
       <div class="apk-card" data-category="tools">
         <img src="https://cdn-icons-png.flaticon.com/512/814/814513.png" alt="Ícono de APK Analyzer">
+        <div class="apk-tags">
+          <span class="tag">Herramienta</span>
+        </div>
         <h3>APK ANALYZER</h3>
         <p>Analiza y descompila APKs fácilmente desde tu PC.</p>
-        <a href="#" target="_blank" class="btn">DOWNLOAD</a>
+        <div class="apk-rating">⭐ 4.5/5</div>
+        <a href="#" target="_blank" class="btn" tabindex="0">DOWNLOAD</a>
       </div>
   
       <div class="apk-card" data-category="tools modding">
         <img src="https://cdn-icons-png.flaticon.com/512/814/814513.png" alt="Ícono de APK Builder">
+        <div class="apk-tags">
+          <span class="tag">Herramienta</span>
+          <span class="tag">Modding</span>
+        </div>
         <h3>APK BUILDER PRO</h3>
         <p>Compila, firma y modifica APKs personalizadas para desarrolladores.</p>
-        <a href="#" target="_blank" class="btn">DOWNLOAD</a>
+        <div class="apk-rating">⭐ 4.7/5</div>
+        <a href="#" target="_blank" class="btn" tabindex="0">DOWNLOAD</a>
       </div>
   
       <div class="apk-card" data-category="modding">
         <img src="https://cdn-icons-png.flaticon.com/512/906/906343.png" alt="Ícono de Game Modder">
+        <div class="apk-tags">
+          <span class="tag">Modding</span>
+        </div>
         <h3>GAME MODDER</h3>
         <p>Edita y crea modificaciones personalizadas para juegos Android.</p>
-        <a href="#" target="_blank" class="btn">DOWNLOAD</a>
+        <div class="apk-rating">⭐ 4.3/5</div>
+        <a href="#" target="_blank" class="btn" tabindex="0">DOWNLOAD</a>
       </div>
   
       <div class="apk-card" data-category="games">
         <img src="https://cdn-icons-png.flaticon.com/512/906/906343.png" alt="Ícono de Retro Emulator">
+        <div class="apk-tags">
+          <span class="tag">Juego</span>
+          <span class="tag">Emulador</span>
+        </div>
         <h3>RETRO EMULATOR</h3>
         <p>Emulador clásico con controles personalizados y guardado de partidas.</p>
-        <a href="#" target="_blank" class="btn">DOWNLOAD</a>
+        <div class="apk-rating">⭐ 4.6/5</div>
+        <a href="#" target="_blank" class="btn" tabindex="0">DOWNLOAD</a>
       </div>
   
       <div class="apk-card" data-category="pc tools">
         <img src="https://cdn-icons-png.flaticon.com/512/2721/2721244.png" alt="Ícono de PC Toolbox">
+        <div class="apk-tags">
+          <span class="tag">Herramienta</span>
+          <span class="tag">PC</span>
+        </div>
         <h3>PC TOOLBOX</h3>
         <p>Kit de herramientas todo-en-uno para optimizar tu PC y gestionar APKs.</p>
-        <a href="#" target="_blank" class="btn">DOWNLOAD</a>
+        <div class="apk-rating">⭐ 4.4/5</div>
+        <a href="#" target="_blank" class="btn" tabindex="0">DOWNLOAD</a>
       </div>
     </div>
   </div>
@@ -175,9 +203,10 @@
     apkCards.forEach(card => {
       const title = card.querySelector('h3').textContent.toLowerCase();
       const description = card.querySelector('p').textContent.toLowerCase();
-      const matchesSearch = title.includes(searchTerm) || description.includes(searchTerm);
+      const tags = card.querySelector('.apk-tags') ? card.querySelector('.apk-tags').textContent.toLowerCase() : '';
+      const rating = card.querySelector('.apk-rating') ? card.querySelector('.apk-rating').textContent.toLowerCase() : '';
+      const matchesSearch = title.includes(searchTerm) || description.includes(searchTerm) || tags.includes(searchTerm) || rating.includes(searchTerm);
 
-      // Mostrar solo las tarjetas que coincidan con la búsqueda
       card.style.display = matchesSearch ? 'block' : 'none';
     });
 
