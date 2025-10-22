@@ -45,7 +45,7 @@ nav a:hover {
 }
 
 .logo img {
-  height: 40px; /* Ajusta según el tamaño de tu logo */
+  height: 40px;
   width: auto;
 }
 
@@ -78,7 +78,6 @@ nav a:hover {
   color: #00d8ff;
 }
 
-/* Mostrar el menú al pasar el cursor */
 .dropdown:hover .dropdown-content {
   display: block;
 }
@@ -96,7 +95,7 @@ nav a:hover {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.6); /* oscurece la imagen para resaltar texto */
+  background: rgba(0, 0, 0, 0.6);
 }
 
 .hero-content {
@@ -148,18 +147,18 @@ h2 {
 
 /* === SEARCH BAR === */
 .search-bar {
-  margin-bottom: 3rem; /* Aumentado para más separación */
+  margin-bottom: 3rem;
 }
 
 .search-bar input {
-  padding: 11.5px; /* Aumentado 1.5px (~2mm) */
+  padding: 11.5px;
   width: 100%;
   max-width: 400px;
   border: none;
   border-radius: 5px;
   background-color: #222;
   color: #fff;
-  font-size: 1.1rem; /* Aumentado 1.5px (~2mm) */
+  font-size: 1.1rem;
 }
 
 .search-bar input::placeholder {
@@ -237,6 +236,28 @@ h2 {
 
 .apk-card img {
   width: 80px;
+  margin-bottom: 1rem;
+}
+
+.apk-tags {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.tag {
+  background-color: #222;
+  color: #00d8ff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.apk-rating {
+  color: #ccc;
+  font-size: 0.9rem;
   margin-bottom: 1rem;
 }
 
@@ -342,10 +363,10 @@ footer {
   }
   .search-bar input {
     max-width: 100%;
-    font-size: 1rem; /* Ajustado para móviles */
-    padding: 10px; /* Ajustado para móviles */
+    font-size: 1rem;
+    padding: 10px;
   }
   .logo img {
-    height: 30px; /* Tamaño más pequeño para móviles */
+    height: 30px;
   }
 }
