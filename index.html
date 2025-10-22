@@ -60,77 +60,7 @@
     </div>
   
     <!-- === APK GRID === -->
-    <div class="apk-grid">
-      <div class="apk-card" data-category="games pc">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8MeIuet-6TkGhvYjhC-aI97L1xJslh3ZI_g&s" alt="Assassin's Creed icon">
-        <div class="apk-tags">
-          <span class="tag">Juego</span>
-          <span class="tag">PC</span>
-        </div>
-        <h3>ASSASSIN'S CREED</h3>
-        <p>Serie de videojuegos de acción-aventura y sigilo ambientada en mundos históricos y abiertos.</p>
-        <div class="apk-rating">⭐ 4.8/5</div>
-        <a href="https://drive.google.com/file/d/1k63MVtw_g3LIB94TSG1xzBncz3rPGaJe/view?usp=sharing" target="_blank" class="btn" tabindex="0">DOWNLOAD</a>
-      </div>
-  
-      <div class="apk-card" data-category="tools">
-        <img src="https://cdn-icons-png.flaticon.com/512/814/814513.png" alt="Ícono de APK Analyzer">
-        <div class="apk-tags">
-          <span class="tag">Herramienta</span>
-        </div>
-        <h3>APK ANALYZER</h3>
-        <p>Analiza y descompila APKs fácilmente desde tu PC.</p>
-        <div class="apk-rating">⭐ 4.5/5</div>
-        <a href="#" target="_blank" class="btn" tabindex="0">DOWNLOAD</a>
-      </div>
-  
-      <div class="apk-card" data-category="tools modding">
-        <img src="https://cdn-icons-png.flaticon.com/512/814/814513.png" alt="Ícono de APK Builder">
-        <div class="apk-tags">
-          <span class="tag">Herramienta</span>
-          <span class="tag">Modding</span>
-        </div>
-        <h3>APK BUILDER PRO</h3>
-        <p>Compila, firma y modifica APKs personalizadas para desarrolladores.</p>
-        <div class="apk-rating">⭐ 4.7/5</div>
-        <a href="#" target="_blank" class="btn" tabindex="0">DOWNLOAD</a>
-      </div>
-  
-      <div class="apk-card" data-category="modding">
-        <img src="https://cdn-icons-png.flaticon.com/512/906/906343.png" alt="Ícono de Game Modder">
-        <div class="apk-tags">
-          <span class="tag">Modding</span>
-        </div>
-        <h3>GAME MODDER</h3>
-        <p>Edita y crea modificaciones personalizadas para juegos Android.</p>
-        <div class="apk-rating">⭐ 4.3/5</div>
-        <a href="#" target="_blank" class="btn" tabindex="0">DOWNLOAD</a>
-      </div>
-  
-      <div class="apk-card" data-category="games">
-        <img src="https://cdn-icons-png.flaticon.com/512/906/906343.png" alt="Ícono de Retro Emulator">
-        <div class="apk-tags">
-          <span class="tag">Juego</span>
-          <span class="tag">Emulador</span>
-        </div>
-        <h3>RETRO EMULATOR</h3>
-        <p>Emulador clásico con controles personalizados y guardado de partidas.</p>
-        <div class="apk-rating">⭐ 4.6/5</div>
-        <a href="#" target="_blank" class="btn" tabindex="0">DOWNLOAD</a>
-      </div>
-  
-      <div class="apk-card" data-category="pc tools">
-        <img src="https://cdn-icons-png.flaticon.com/512/2721/2721244.png" alt="Ícono de PC Toolbox">
-        <div class="apk-tags">
-          <span class="tag">Herramienta</span>
-          <span class="tag">PC</span>
-        </div>
-        <h3>PC TOOLBOX</h3>
-        <p>Kit de herramientas todo-en-uno para optimizar tu PC y gestionar APKs.</p>
-        <div class="apk-rating">⭐ 4.4/5</div>
-        <a href="#" target="_blank" class="btn" tabindex="0">DOWNLOAD</a>
-      </div>
-    </div>
+    <div class="apk-grid" id="apk-grid"></div>
   </div>
 </section>
 
@@ -171,34 +101,63 @@
   <p>&copy; 2025 ShowX. All rights reserved.</p>
 </footer>
 
-<!-- === JS FILTER AND SEARCH === -->
+<!-- === JS FILTER, SEARCH, AND DYNAMIC APKS === -->
 <script>
-  const filterButtons = document.querySelectorAll('.filter-btn');
-  const apkCards = document.querySelectorAll('.apk-card');
-  const searchInput = document.querySelector('#search-input');
+  // Cargar datos desde Google Sheets (CSV)
+  async function loadApks() {
+    const response = await fetch('https://docs.google.com/spreadsheets/d/tu-id-hoja/pub?output=csv');
+    const data = await response.text();
+    const rows = data.split('\n').slice(1); // Ignora la primera fila (encabezados)
+    const apkGrid = document.getElementById('apk-grid');
+
+    rows.forEach(row => {
+      const [name, package, description, url, image, rating] = row.split(',').map(item => item.trim());
+      const categories = package.toLowerCase().replace(/,/g, ' '); // Convierte "Juego,PC" a "juego pc"
+      const tags = package.split(',').map(tag => `<span class="tag">${tag.trim()}</span>`).join('');
+
+      const apkCard = document.createElement('div');
+      apkCard.className = 'apk-card';
+      apkCard.dataset.category = categories;
+      apkCard.innerHTML = `
+        <img src="${image || 'https://cdn-icons-png.flaticon.com/512/906/906343.png'}" alt="${name} icon">
+        <div class="apk-tags">${tags}</div>
+        <h3>${name}</h3>
+        <p>${description}</p>
+        <div class="apk-rating">⭐ ${rating || '4.0'}</div>
+        <a href="${url}" target="_blank" class="btn" tabindex="0">DOWNLOAD</a>
+      `;
+      apkGrid.appendChild(apkCard);
+    });
+  }
+
+  // Llamar a la función al cargar la página
+  loadApks().catch(err => console.error('Error loading APKs:', err));
 
   // Filtrado por categoría
+  const filterButtons = document.querySelectorAll('.filter-btn');
+  const apkGrid = document.getElementById('apk-grid');
+
   filterButtons.forEach(button => {
     button.addEventListener('click', () => {
       filterButtons.forEach(btn => btn.classList.remove('active'));
       button.classList.add('active');
 
       const category = button.dataset.category;
+      const apkCards = apkGrid.querySelectorAll('.apk-card');
 
       apkCards.forEach(card => {
-        const categories = card.dataset.category.split(" ");
-        if (category === 'all' || categories.includes(category)) {
-          card.style.display = 'block';
-        } else {
-          card.style.display = 'none';
-        }
+        const categories = card.dataset.category.split(' ');
+        card.style.display = category === 'all' || categories.includes(category) ? 'block' : 'none';
       });
     });
   });
 
   // Búsqueda en tiempo real
+  const searchInput = document.querySelector('#search-input');
+
   searchInput.addEventListener('input', () => {
     const searchTerm = searchInput.value.toLowerCase();
+    const apkCards = apkGrid.querySelectorAll('.apk-card');
 
     apkCards.forEach(card => {
       const title = card.querySelector('h3').textContent.toLowerCase();
@@ -210,7 +169,6 @@
       card.style.display = matchesSearch ? 'block' : 'none';
     });
 
-    // Si hay un término de búsqueda, desactivar el filtrado por categoría
     if (searchTerm) {
       filterButtons.forEach(btn => btn.classList.remove('active'));
     }
