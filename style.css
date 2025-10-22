@@ -224,7 +224,7 @@ h2 {
   transform: scale(0.8);
 }
 
-.apk-card[style*="display: block"] {
+.apk-card[style*="display: block"]) {
   opacity: 1;
   transform: scale(1);
 }
