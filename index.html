@@ -8,8 +8,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="icon" href="LOGO.png" type="image/png">
   <link rel="stylesheet" href="style.css">
-  <!-- PapaParse para parsear CSV -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
 </head>
 <body>
 <!-- === NAVIGATION === -->
@@ -21,9 +19,10 @@
   <div class="dropdown">
     <a href="#categorias" class="dropbtn" aria-label="Menú de categorías">CATEGORÍAS ▾</a>
     <div class="dropdown-content">
-      <a href="#video">VIDEO</a>
+      <a href="#tools">TOOLS</a>
+      <a href="#modding">MODS</a>
       <a href="#games">GAMES</a>
-      <a href="#modding">MOD</a>
+      <a href="#pc">PC</a>
     </div>
   </div>
   <a href="#news">NEWS</a>
@@ -54,9 +53,10 @@
     <!-- === CATEGORY FILTERS === -->
     <div class="apk-filters">
       <button class="filter-btn active" data-category="all">ALL</button>
-      <button class="filter-btn" data-category="video">VIDEO</button>
-      <button class="filter-btn" data-category="games">GAMES</button>
+      <button class="filter-btn" data-category="tools">TOOLS</button>
       <button class="filter-btn" data-category="modding">MOD</button>
+      <button class="filter-btn" data-category="games">GAMES</button>
+      <button class="filter-btn" data-category="pc">PC</button>
     </div>
   
     <!-- === APK GRID === -->
@@ -104,65 +104,33 @@
 
 <!-- === JS FILTER, SEARCH, AND DYNAMIC APKS === -->
 <script>
-  // Determinar categorías basadas en nombre y descripción
-  function getCategories(name, description) {
-    const lowerName = name.toLowerCase();
-    const lowerDesc = description.toLowerCase();
-    const categories = [];
-
-    if (lowerName.includes('capcut') || lowerDesc.includes('edición') || lowerDesc.includes('video')) {
-      categories.push('Edición de Video');
-    }
-    if (lowerName.includes('simulator') || lowerDesc.includes('juego') || lowerDesc.includes('game')) {
-      categories.push('Juego');
-    }
-    if (lowerName.includes('mod') || lowerDesc.includes('mod')) {
-      categories.push('Modding');
-    }
-
-    return categories.length > 0 ? categories : ['App'];
-  }
-
   // Cargar datos desde Google Sheets (CSV)
   async function loadApks() {
     try {
-      Papa.parse('https://docs.google.com/spreadsheets/d/e/2PACX-1vTUbapksr6zWszFpUjeWR6jPS6QOA6OL7iuO4ew9gASwx5LLzR9o-bKbRXSLQv360GQBoINiSpdzIGf/pub?gid=1055416471&single=true&output=csv', {
-        download: true,
-        header: true,
-        complete: function(results) {
-          const apkGrid = document.getElementById('apk-grid');
-          apkGrid.innerHTML = ''; // Limpia el grid
+      const response = await fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vTUbapksr6zWszFpUjeWR6jPS6QOA6OL7iuO4ew9gASwx5LLzR9o-bKbRXSLQv360GQBoINiSpdzIGf/pub?gid=1055416471&single=true&output=csv');
+      const data = await response.text();
+      const rows = data.split('\n').slice(1); // Ignora la primera fila (encabezados)
+      const apkGrid = document.getElementById('apk-grid');
 
-          results.data.forEach(row => {
-            const name = row.Nombre || 'Sin nombre';
-            const description = row.Descripción || 'Sin descripción';
-            const url = row.URL_Descarga || '#';
-            const image = row.URL_Imagen || 'https://cdn-icons-png.flaticon.com/512/906/906343.png';
-            const rating = row.Calificación || '4.0';
+      apkGrid.innerHTML = ''; // Limpia el grid antes de añadir
 
-            // Obtener categorías dinámicamente
-            const categories = getCategories(name, description);
-            const categoryData = categories.map(c => c.toLowerCase().replace(/ /g, '')).join(' ');
-            const tags = categories.map(tag => `<span class="tag">${tag}</span>`).join('');
+      rows.forEach(row => {
+        const [name, package, description, url, image, rating] = row.split(',').map(item => item.trim());
+        const categories = package.toLowerCase().replace(/,/g, ' '); // Ej: "Juego,PC" -> "juego pc"
+        const tags = package.split(',').map(tag => `<span class="tag">${tag.trim()}</span>`).join('');
 
-            const apkCard = document.createElement('div');
-            apkCard.className = 'apk-card';
-            apkCard.dataset.category = categoryData;
-            apkCard.innerHTML = `
-              <img src="${image}" alt="${name} icon">
-              <div class="apk-tags">${tags}</div>
-              <h3>${name}</h3>
-              <p>${description}</p>
-              <div class="apk-rating">⭐ ${rating}</div>
-              <a href="${url}" target="_blank" class="btn" tabindex="0">DOWNLOAD</a>
-            `;
-            apkGrid.appendChild(apkCard);
-          });
-        },
-        error: function(err) {
-          console.error('Error parsing CSV:', err);
-          document.getElementById('error').style.display = 'block';
-        }
+        const apkCard = document.createElement('div');
+        apkCard.className = 'apk-card';
+        apkCard.dataset.category = categories;
+        apkCard.innerHTML = `
+          <img src="${image || 'https://cdn-icons-png.flaticon.com/512/906/906343.png'}" alt="${name} icon">
+          <div class="apk-tags">${tags}</div>
+          <h3>${name}</h3>
+          <p>${description}</p>
+          <div class="apk-rating">⭐ ${rating || '4.0'}</div>
+          <a href="${url}" target="_blank" class="btn" tabindex="0">DOWNLOAD</a>
+        `;
+        apkGrid.appendChild(apkCard);
       });
     } catch (err) {
       console.error('Error loading APKs:', err);
