@@ -48,12 +48,12 @@
   
     <!-- === SEARCH BAR === -->
     <div class="search-bar">
-      <input type="text" id="search-input" placeholder="Search APKs..." aria-label="Search APKs">
+      <input type="text" id="search-input" placeholder="Search..." aria-label="Search">
     </div>
   
     <!-- === CATEGORY FILTERS === -->
     <div class="apk-filters">
-      <button class="filter-btn active" data-category="all">ALL</button>
+      <button class="filter-btn active" data-category="all">APK</button>
       <button class="filter-btn" data-category="video">VIDEO</button>
       <button class="filter-btn" data-category="games">GAMES</button>
       <button class="filter-btn" data-category="modding">MOD</button>
@@ -137,8 +137,8 @@
             const name = row.Nombre || 'Sin nombre';
             const description = row.Descripción || 'Sin descripción';
             const url = row.URL_Descarga || '#';
-            const image = row.URL_Imagen || 'https://cdn-icons-png.flaticon.com/512/906/906343.png';
-            const rating = row.Calificación || '4.0';
+            const image = row.URL_Imagen || 'https://img.freepik.com/vector-premium/icono-android-icono-relleno-negro_1076610-103538.jpg?semt=ais_hybrid&w=740&q=80';
+            const rating = row.Calificación || '3.8';
 
             // Obtener categorías dinámicamente
             const categories = getCategories(name, description);
