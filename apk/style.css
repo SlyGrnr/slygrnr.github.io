@@ -1,1 +1,372 @@
+/* === RESET GENERAL === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
 
+body {
+  background-color: #0a0a0a;
+  color: #fff;
+  text-align: center;
+}
+
+/* === CONTAINER === */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* === NAVIGATION === */
+nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  background-color: #111;
+  padding: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  letter-spacing: 1px;
+  transition: color 0.3s;
+}
+
+nav a:hover {
+  color: #00d8ff;
+}
+
+.logo img {
+  height: 40px;
+  width: auto;
+}
+
+/* === DROPDOWN MENU === */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #222;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px rgba(0,0,0,0.5);
+  z-index: 1;
+  border-radius: 8px;
+}
+
+.dropdown-content a {
+  color: #fff;
+  padding: 10px;
+  display: block;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.dropdown-content a:hover {
+  background-color: #333;
+  color: #00d8ff;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* === HERO SECTION === */
+.hero {
+  background: url("BANNER.jpg") center/cover no-repeat;
+  padding: 6rem 1rem;
+  text-align: center;
+  color: white;
+  position: relative;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  letter-spacing: 2px;
+}
+
+.hero-content span {
+  color: #00d8ff;
+}
+
+.hero-content p {
+  margin-top: 10px;
+  font-size: 1.2rem;
+  color: #ccc;
+}
+
+.btn {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 25px;
+  background-color: #00d8ff;
+  color: #000;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 5px;
+  transition: background 0.3s;
+}
+
+.btn:hover {
+  background-color: #00aacc;
+}
+
+/* === SECTION === */
+section {
+  padding: 3rem 1rem;
+}
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #00d8ff;
+}
+
+/* === SEARCH BAR === */
+.search-bar {
+  margin-bottom: 3rem;
+}
+
+.search-bar input {
+  padding: 11.5px;
+  width: 100%;
+  max-width: 400px;
+  border: none;
+  border-radius: 5px;
+  background-color: #222;
+  color: #fff;
+  font-size: 1.1rem;
+}
+
+.search-bar input::placeholder {
+  color: #ccc;
+}
+
+.search-bar input:focus {
+  outline: 2px solid #00d8ff;
+}
+
+/* === FILTER BUTTONS === */
+.apk-filters {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 2rem;
+}
+
+.filter-btn {
+  padding: 10px 15px;
+  border: none;
+  background-color: #222;
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 5px;
+  transition: background 0.3s;
+}
+
+.filter-btn:hover {
+  background-color: #00d8ff;
+  color: #000;
+}
+
+.filter-btn.active {
+  background-color: #00d8ff;
+  color: #000;
+}
+
+/* === APK GRID === */
+.apk-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  justify-items: center;
+  padding: 1rem;
+}
+
+.apk-card {
+  background-color: #111;
+  border-radius: 10px;
+  padding: 1.5rem;
+  width: 90%;
+  max-width: 300px;
+  text-align: center;
+  box-shadow: 0 0 15px rgba(0,0,0,0.4);
+  transition: transform 0.3s, box-shadow 0.3s, opacity 0.3s;
+}
+
+.apk-card:not([style*="display: block"]) {
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+.apk-card[style*="display: block"] {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.apk-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 25px rgba(0,216,255,0.4);
+}
+
+.apk-card img {
+  width: 80px;
+  margin-bottom: 1rem;
+}
+
+.apk-tags {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.tag {
+  background-color: #222;
+  color: #00d8ff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.apk-rating {
+  color: #ccc;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.apk-card h3 {
+  margin-bottom: 10px;
+  color: #00d8ff;
+  font-size: 1.1rem;
+}
+
+.apk-card p {
+  font-size: 0.9rem;
+  color: #ccc;
+  margin-bottom: 1rem;
+}
+
+/* === NEWS SECTION === */
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  padding: 1rem;
+}
+
+.news-card {
+  background-color: #111;
+  border-radius: 10px;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 0 0 15px rgba(0,0,0,0.4);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.news-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 25px rgba(0,216,255,0.4);
+}
+
+.news-card h3 {
+  color: #00d8ff;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.news-card p {
+  color: #ccc;
+  font-size: 0.9rem;
+}
+
+/* === CONTACT SECTION === */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 500px;
+  margin: 2rem auto;
+}
+
+.contact-form input,
+.contact-form textarea {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #222;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.contact-form textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: 2px solid #00d8ff;
+}
+
+.contact-form button {
+  align-self: center;
+}
+
+/* === FOOTER === */
+footer {
+  background-color: #111;
+  padding: 1rem;
+  text-align: center;
+  color: #ccc;
+  font-size: 0.9rem;
+}
+
+/* === RESPONSIVE DESIGN === */
+@media (max-width: 600px) {
+  nav {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .dropdown-content {
+    position: static;
+    min-width: 100%;
+  }
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+  .search-bar input {
+    max-width: 100%;
+    font-size: 1rem;
+    padding: 10px;
+  }
+  .logo img {
+    height: 30px;
+  }
+}
