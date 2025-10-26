@@ -1,0 +1,54 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #f8cdda, #1d2b64);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 20px;
+  padding: 40px;
+  max-width: 500px;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 1.5s ease;
+}
+
+h1 {
+  color: #d63384;
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+p {
+  color: #333;
+  line-height: 1.6;
+  font-size: 1.1em;
+}
+
+button {
+  margin-top: 25px;
+  padding: 12px 25px;
+  font-size: 1em;
+  border: none;
+  border-radius: 10px;
+  background-color: #d63384;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background-color: #b0246a;
+  transform: scale(1.05);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
