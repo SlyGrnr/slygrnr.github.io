@@ -3,8 +3,65 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MIRELA PUES</title>
+  <title>El Guardia Sam</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* ===== Estilos específicos para la tarjeta de película ===== */
+    .apk-card img {
+      width: 100%;
+      border-radius: 12px;
+      margin-bottom: 15px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .apk-card img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 25px rgba(0, 216, 255, 0.5);
+    }
+
+    .apk-card h3 {
+      font-size: 1.4rem;
+      color: #00d8ff;
+      margin-bottom: 12px;
+    }
+
+    .apk-card p {
+      font-size: 1rem;
+      color: #ccc;
+      line-height: 1.6;
+      text-align: justify;
+    }
+
+    .btn-container {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    .apk-card .btn {
+      flex: 1;
+      text-align: center;
+      padding: 12px 20px;
+      font-size: 1rem;
+      font-weight: bold;
+      border-radius: 8px;
+      transition: all 0.3s;
+    }
+
+    .apk-card .btn:hover {
+      background-color: #00aacc;
+      color: #000;
+      transform: scale(1.05);
+    }
+
+    section {
+      padding: 4rem 1rem;
+      display: flex;
+      justify-content: center;
+    }
+  </style>
 </head>
 <body>
 
@@ -14,20 +71,21 @@
 
       <div class="apk-card" style="display: block;">
         <!-- Imagen de la película -->
-        <img src="https://i.ytimg.com/vi/dt1j_pFmsVc/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLCzZXRH50WZ0VcXpWVKUTSALmiLoQ" alt="Poster de la Película" style="width:100%; border-radius:10px; margin-bottom:15px;">
+        <img src="https://i.ytimg.com/vi/dt1j_pFmsVc/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLCzZXRH50WZ0VcXpWVKUTSALmiLoQ" 
+             alt="Poster de la Película">
 
         <!-- Título de la película -->
-        <h3>El guardia sam y su problema con la prisionera</h3>
+        <h3>El guardia Sam y su problema con la prisionera</h3>
 
         <!-- Descripción de la película -->
         <p>
-          En el primer episodio de la serie, el guardia novato Sam es engañado para entregar una carta a un prisionero.
-          Mike McLusky interviene para ayudarlo, iniciando una de las subtramas que muestra la corrupción y la brutalidad del sistema.
+          En el primer episodio de la serie, el guardia novato Sam es engañado para entregar una carta a un prisionero.  
+          Mike McLusky interviene para ayudarlo, iniciando una de las subtramas que muestra la corrupción y la brutalidad del sistema.  
           Este personaje es interpretado por el actor Mandela Van Peebles.
         </p>
 
         <!-- Botones -->
-        <div style="display:flex; justify-content:center; gap:10px; margin-top:15px;">
+        <div class="btn-container">
           <a href="https://drive.google.com/file/d/1GjS89bGhia3-weSZtUOdp1mRD_5Z7FFV/view?usp=drive_link" class="btn" target="_blank">Ver en Drive</a>
           <a href="https://www.cinecalidad.ec/" class="btn" target="_blank">Ver más</a>
         </div>
