@@ -7,10 +7,34 @@
   <link rel="stylesheet" href="style.css">
   <style>
     /* ===== Estilos específicos para la tarjeta de película ===== */
+    section {
+      padding: 3rem 1rem;
+      display: flex;
+      justify-content: center;
+    }
+
+    .apk-grid {
+      width: 100%;
+      max-width: 800px; /* tamaño máximo para escritorio */
+    }
+
+    .apk-card {
+      background-color: #111;
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: 0 0 25px rgba(0,216,255,0.4);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .apk-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 35px rgba(0,216,255,0.6);
+    }
+
     .apk-card img {
       width: 100%;
       border-radius: 12px;
-      margin-bottom: 15px;
+      margin-bottom: 20px;
       transition: transform 0.3s, box-shadow 0.3s;
     }
 
@@ -20,9 +44,10 @@
     }
 
     .apk-card h3 {
-      font-size: 1.4rem;
+      font-size: 1.6rem;
       color: #00d8ff;
-      margin-bottom: 12px;
+      margin-bottom: 15px;
+      text-align: center;
     }
 
     .apk-card p {
@@ -36,12 +61,13 @@
       display: flex;
       justify-content: center;
       gap: 15px;
-      margin-top: 20px;
+      margin-top: 25px;
       flex-wrap: wrap;
     }
 
     .apk-card .btn {
       flex: 1;
+      min-width: 120px;
       text-align: center;
       padding: 12px 20px;
       font-size: 1rem;
@@ -56,10 +82,31 @@
       transform: scale(1.05);
     }
 
-    section {
-      padding: 4rem 1rem;
-      display: flex;
-      justify-content: center;
+    /* ===== Responsive para móviles ===== */
+    @media (max-width: 600px) {
+      section {
+        padding: 2rem 0.5rem;
+      }
+
+      .apk-card {
+        padding: 1.5rem;
+      }
+
+      .apk-card h3 {
+        font-size: 1.4rem;
+      }
+
+      .apk-card p {
+        font-size: 0.95rem;
+      }
+
+      .btn-container {
+        flex-direction: column;
+      }
+
+      .apk-card .btn {
+        width: 100%;
+      }
     }
   </style>
 </head>
