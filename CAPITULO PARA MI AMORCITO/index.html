@@ -4,10 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>El Guardia Sam</title>
-  <link rel="stylesheet" href="style.css">
-
   <style>
-    /* === Ajustes visibles === */
+    /* === RESET GENERAL === */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif; /* Cambiado a Arial para evitar dependencia de Poppins */
+    }
+
+    /* === BODY === */
     body {
       background: linear-gradient(to bottom, #000000, #0a0a0a);
       color: #fff;
@@ -15,26 +21,23 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      padding: 1rem; /* Añadido para evitar que el contenido toque los bordes */
     }
 
+    /* === SECTION === */
     section {
       width: 100%;
-      display: flex;
-      justify-content: center;
-      padding: 3rem 1rem;
-    }
-
-    .apk-grid {
-      width: 100%;
       max-width: 900px;
+      padding: 1rem;
     }
 
+    /* === APK CARD === */
     .apk-card {
       background: rgba(20, 20, 20, 0.95);
       border: 2px solid rgba(0, 216, 255, 0.3);
       border-radius: 18px;
-      padding: 2.5rem;
-      box-shadow: 0 0 40px rgba(0,216,255,0.3);
+      padding: 2rem;
+      box-shadow: 0 0 40px rgba(0, 216, 255, 0.3);
       transition: all 0.3s ease;
       opacity: 1;
       transform: scale(1);
@@ -42,27 +45,30 @@
 
     .apk-card:hover {
       transform: scale(1.02);
-      box-shadow: 0 0 50px rgba(0,216,255,0.6);
+      box-shadow: 0 0 50px rgba(0, 216, 255, 0.6);
     }
 
     .apk-card img {
       width: 100%;
+      max-width: 400px; /* Limitar el tamaño máximo de la imagen */
       border-radius: 15px;
-      margin-bottom: 20px;
+      margin-bottom: 1rem;
       display: block;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .apk-card h3 {
-      font-size: 2rem;
+      font-size: 1.8rem;
       color: #00d8ff;
-      margin-bottom: 15px;
+      margin-bottom: 1rem;
       text-align: center;
     }
 
     .apk-card p {
-      font-size: 1.1rem;
+      font-size: 1rem;
       color: #e0e0e0;
-      line-height: 1.8;
+      line-height: 1.6;
       text-align: justify;
     }
 
@@ -70,52 +76,59 @@
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
-      gap: 20px;
-      margin-top: 25px;
+      gap: 1rem;
+      margin-top: 1.5rem;
     }
 
     .btn {
       background-color: #00d8ff;
       color: #000;
-      padding: 14px 30px;
+      padding: 0.8rem 1.8rem;
       font-size: 1rem;
       font-weight: bold;
-      border-radius: 10px;
+      border-radius: 8px;
       text-decoration: none;
-      transition: 0.3s;
+      transition: all 0.3s ease;
     }
 
     .btn:hover {
       background-color: #00aacc;
       transform: scale(1.05);
     }
+
+    /* === RESPONSIVE DESIGN === */
+    @media (max-width: 600px) {
+      .apk-card {
+        padding: 1.5rem;
+      }
+      .apk-card h3 {
+        font-size: 1.5rem;
+      }
+      .apk-card p {
+        font-size: 0.9rem;
+      }
+      .btn {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+      }
+    }
   </style>
 </head>
 <body>
-
   <section>
-    <div class="apk-grid">
-
-      <div class="apk-card">
-        <img src="https://i.ytimg.com/vi/dt1j_pFmsVc/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLCzZXRH50WZ0VcXpWVKUTSALmiLoQ" 
-             alt="Poster de El guardia Sam">
-
-        <h3>El guardia Sam y su problema con la prisionera</h3>
-
-        <p>
-          En el primer episodio de la serie, el joven guardia Sam es engañado para entregar una carta a un prisionero.  
-          La acción se complica cuando Mike McLusky interviene para protegerlo, revelando las tensiones entre el poder y la corrupción dentro del sistema penitenciario.  
-          Este intenso inicio marca el tono de la serie y presenta a Sam como un personaje atrapado entre la lealtad y la supervivencia.
-        </p>
-
-        <div class="btn-container">
-          <a href="https://drive.google.com/file/d/1GjS89bGhia3-weSZtUOdp1mRD_5Z7FFV/view?usp=drive_link" class="btn" target="_blank">▶ Ver Ahora</a>
-          <a href="https://www.cinecalidad.ec/" class="btn" target="_blank">Más Información</a>
-        </div>
+    <div class="apk-card">
+      <img src="https://via.placeholder.com/400" alt="Poster de El guardia Sam">
+      <h3>El guardia Sam y su problema con la prisionera</h3>
+      <p>
+        En el primer episodio de la serie, el joven guardia Sam es engañado para entregar una carta a un prisionero.
+        La acción se complica cuando Mike McLusky interviene para protegerlo, revelando las tensiones entre el poder y la corrupción dentro del sistema penitenciario.
+        Este intenso inicio marca el tono de la serie y presenta a Sam como un personaje atrapado entre la lealtad y la supervivencia.
+      </p>
+      <div class="btn-container">
+        <a href="https://drive.google.com/file/d/1GjS89bGhia3-weSZtUOdp1mRD_5Z7FFV/view?usp=drive_link" class="btn" target="_blank" rel="noopener noreferrer">▶ Ver Ahora</a>
+        <a href="https://www.cinecalidad.ec/" class="btn" target="_blank" rel="noopener noreferrer">Más Información</a>
       </div>
-
     </div>
   </section>
-
 </body>
 </html>
