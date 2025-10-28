@@ -10,6 +10,25 @@
   <link rel="stylesheet" href="style.css">
   <!-- PapaParse para parsear CSV -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+
+
+  
+  <!-- HEADER -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Sitio Web</title>
+
+  <script>
+    // Cargar header.html automáticamente
+    fetch("/header.html")
+      .then(res => res.text())
+      .then(data => document.head.insertAdjacentHTML("beforeend", data));
+  </script>
+
+
+  
+
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <!-- === NAVIGATION === -->
