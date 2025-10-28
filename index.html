@@ -14,15 +14,17 @@
 
   
   <!-- HEADER -->
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mi Sitio Web</title>
-
   <script>
-    // Cargar header.html automáticamente
-    fetch("/header.html")
-      .then(res => res.text())
-      .then(data => document.head.insertAdjacentHTML("beforeend", data));
+    // Detectar automáticamente la ruta correcta de header.html
+    (function() {
+      let depth = window.location.pathname.split("/").length - 2;
+      let path = "./";
+      for (let i = 0; i < depth; i++) path += "../";
+      fetch(path + "header.html")
+        .then(res => res.ok ? res.text() : Promise.reject(res.status))
+        .then(html => document.head.insertAdjacentHTML("beforeend", html))
+        .catch(err => console.warn("No se pudo cargar header.html:", err));
+    })();
   </script>
 
 
