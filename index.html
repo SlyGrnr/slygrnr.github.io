@@ -235,5 +235,24 @@
     }
   });
 </script>
+  <script>
+  let lastScrollTop = 0;
+  const navbar = document.querySelector("nav");
+
+  window.addEventListener("scroll", function() {
+    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+    if (currentScroll > lastScrollTop && currentScroll > 80) {
+      // Bajando → contraer
+      navbar.classList.add("shrink");
+    } else {
+      // Subiendo → expandir
+      navbar.classList.remove("shrink");
+    }
+
+    lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+  });
+</script>
+
 </body>
 </html>
