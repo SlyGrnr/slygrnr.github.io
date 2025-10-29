@@ -5,9 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="ShowX APKs, MODs, ISOs, Películas, Programas, Links útiles y más.">
   <title>ShowX APKs</title>
+
+  <!-- Fuentes y estilos -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="icon" href="LOGO.png" type="image/png">
   <link rel="stylesheet" href="style.css">
+
+  <!-- Librería PapaParse -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
 </head>
 
@@ -29,6 +33,10 @@
         <button class="filter-btn" data-category="video">VIDEO</button>
         <button class="filter-btn" data-category="games">GAMES</button>
         <button class="filter-btn" data-category="modding">MOD</button>
+        <button class="filter-btn" data-category="music">MUSIC</button>
+        <button class="filter-btn" data-category="tools">TOOLS</button>
+        <button class="filter-btn" data-category="streaming">STREAM</button>
+        <button class="filter-btn" data-category="social">SOCIAL</button>
       </div>
 
       <!-- === CUADRÍCULA DE APLICACIONES === -->
@@ -44,13 +52,25 @@
       const text = `${name} ${description}`.toLowerCase();
       const categories = [];
 
-      if (text.includes('video') || text.includes('capcut') || text.includes('edición'))
-        categories.push('video');
-      if (text.includes('game') || text.includes('juego') || text.includes('simulator'))
-        categories.push('games');
-      if (text.includes('mod'))
-        categories.push('modding');
+      // --- Palabras clave por categoría ---
+      const categoryKeywords = {
+        video: ['video', 'capcut', 'edición', 'editor', 'cámara', 'reel', 'filmora', 'kinemaster', 'clips', 'vid', 'recorder'],
+        games: ['game', 'juego', 'simulator', 'racing', 'battle', 'survival', 'adventure', 'puzzle', 'fight', 'quest', 'action'],
+        modding: ['mod', 'hack', 'cheat', 'infinite', 'dinero ilimitado', 'unlocked', 'premium', 'patch', 'crack'],
+        music: ['música', 'audio', 'spotify', 'song', 'player', 'beat', 'mp3', 'sound', 'radio'],
+        tools: ['herramienta', 'tool', 'scanner', 'cleaner', 'optimizador', 'manager', 'launcher', 'file', 'editor de texto', 'monitor'],
+        streaming: ['película', 'cine', 'movie', 'tv', 'series', 'stream', 'player', 'hbo', 'netflix', 'anime'],
+        social: ['chat', 'red social', 'messenger', 'whatsapp', 'instagram', 'facebook', 'tiktok', 'telegram']
+      };
 
+      // --- Revisión automática ---
+      for (const [category, keywords] of Object.entries(categoryKeywords)) {
+        if (keywords.some(word => text.includes(word))) {
+          categories.push(category);
+        }
+      }
+
+      // --- Categoría por defecto ---
       return categories.length ? categories : ['apk'];
     }
 
