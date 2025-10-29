@@ -100,7 +100,7 @@
               const rating = row.Calificación || '3.8';
             
               // 🔹 NUEVA URL LOCAL (basada en el nombre)
-              const formattedName = name.replace(/\s+/g, '%').toLowerCase(); // Ejemplo: "CapCut Video Editor" → "capcut-video-editor"
+              const formattedName = name.replace(/\s+/g, '%'); // Ejemplo: "CapCut Video Editor" → "CapCut%Video%Editor"
               const url = `https://slygrnr.github.io/apk/${formattedName}/`;
             
               const categories = getCategories(name, description);
