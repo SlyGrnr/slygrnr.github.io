@@ -74,7 +74,7 @@
             const fragment = document.createDocumentFragment();
 
             results.data.forEach(row => {
-              const name = row.Nombre?.trim() || 'Sin nombre';
+              const name = row.NOMBRE?.trim() || 'Sin nombre';
               const description = row.Descripción?.trim() || 'Sin descripción';
               const url = row.URL_Descarga || '#';
               const image = row.URL_Imagen || 'https://img.freepik.com/vector-premium/icono-android-icono-relleno-negro_1076610-103538.jpg?semt=ais_hybrid&w=740&q=80';
