@@ -8,19 +8,64 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="icon" href="LOGO.png" type="image/png">
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* ===== RESET ===== */
+    * {margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif;}
+    body {background:#fff; color:#333;}
+    a {text-decoration:none; color:inherit;}
+    ul {list-style:none;}
 
-  <!-- HEADER (opcional) -->
-  <script>
-    (function() {
-      let depth = window.location.pathname.split("/").length - 2;
-      let path = "./";
-      for (let i = 0; i < depth; i++) path += "../";
-      fetch(path + "header.html")
-        .then(res => res.ok ? res.text() : Promise.reject(res.status))
-        .then(html => document.head.insertAdjacentHTML("beforeend", html))
-        .catch(err => console.warn("No se pudo cargar header.html:", err));
-    })();
-  </script>
+    /* ===== NAVBAR ===== */
+    nav {
+      display:flex; justify-content:space-between; align-items:center;
+      padding:1rem 2rem; background:#111; color:#fff; position:sticky; top:0; z-index:1000;
+      transition: all 0.3s ease;
+    }
+    nav.shrink {padding:0.5rem 2rem; background:#000;}
+    nav a {margin-left:1.5rem; color:#fff; font-weight:600;}
+    nav .logo img {height:50px;}
+
+    /* ===== HERO ===== */
+    .hero {
+      background:url('BANNER.jpg') center/cover no-repeat; height:90vh; display:flex; align-items:center; justify-content:center;
+      text-align:center; color:#fff; position:relative;
+    }
+    .hero::after {
+      content:""; position:absolute; top:0; left:0; width:100%; height:100%;
+      background:rgba(0,0,0,0.5);
+    }
+    .hero-content {position:relative; z-index:1;}
+    .hero h1 {font-size:3rem; margin-bottom:1rem;}
+    .hero p {font-size:1.2rem; margin-bottom:2rem;}
+    .hero .btn {padding:0.8rem 2rem; background:#ff3c00; color:#fff; border-radius:5px; font-weight:600; margin:0 0.5rem; transition:0.3s;}
+    .hero .btn:hover {background:#e03500;}
+
+    /* ===== SUGERENCIAS ===== */
+    #sugerencias {padding:4rem 2rem; background:#f5f5f5; text-align:center;}
+    #sugerencias h2 {font-size:2rem; margin-bottom:1rem;}
+    #sugerencias p {margin-bottom:2rem; color:#555;}
+    .suggestions-grid {display:flex; gap:2rem; justify-content:center; flex-wrap:wrap;}
+    .suggestion-card {background:#fff; padding:2rem; border-radius:10px; box-shadow:0 4px 15px rgba(0,0,0,0.1); flex:1 1 250px; max-width:300px; transition:0.3s;}
+    .suggestion-card:hover {transform:translateY(-5px); box-shadow:0 6px 20px rgba(0,0,0,0.15);}
+
+    /* ===== NEWS ===== */
+    #news {padding:4rem 2rem; text-align:center;}
+    #news h2 {font-size:2rem; margin-bottom:1rem;}
+    .news-grid {display:flex; gap:2rem; justify-content:center; flex-wrap:wrap;}
+    .news-card {background:#fff; padding:1.5rem; border-radius:10px; box-shadow:0 4px 15px rgba(0,0,0,0.1); flex:1 1 250px; max-width:300px; transition:0.3s;}
+    .news-card:hover {transform:translateY(-5px); box-shadow:0 6px 20px rgba(0,0,0,0.15);}
+
+    /* ===== CONTACT ===== */
+    #contact {padding:4rem 2rem; background:#f5f5f5; text-align:center;}
+    #contact h2 {font-size:2rem; margin-bottom:1rem;}
+    .contact-form {max-width:500px; margin:0 auto; display:flex; flex-direction:column; gap:1rem;}
+    .contact-form input, .contact-form textarea {padding:0.8rem; border-radius:5px; border:1px solid #ccc;}
+    .contact-form button {padding:0.8rem; background:#ff3c00; color:#fff; border:none; border-radius:5px; font-weight:600; cursor:pointer; transition:0.3s;}
+    .contact-form button:hover {background:#e03500;}
+
+    /* ===== FOOTER ===== */
+    footer {padding:2rem; text-align:center; background:#111; color:#fff;}
+  </style>
 </head>
 <body>
 
@@ -29,18 +74,22 @@
   <a href="#home" class="logo">
     <img src="LOGO.png" alt="ShowX Logo">
   </a>
-  <a href="#home">HOME</a>
-  <a href="#news">NEWS</a>
-  <a href="#contact">CONTACT</a>
-  <a href="#support">SUPPORT ME</a>
+  <div>
+    <a href="apk/">APLICACIONES</a>
+    <a href="peliculas/">PELÍCULAS</a>
+    <a href="pc/">PROGRAMAS PC</a>
+    <a href="#news">NEWS</a>
+    <a href="#contact">CONTACT</a>
+    <a href="#support">SUPPORT ME</a>
+  </div>
 </nav>
 
 <!-- === HERO SECTION === -->
-<section class="hero" style="background: url('BANNER.jpg') center/cover no-repeat;">
+<section class="hero" id="home">
   <div class="hero-content">
     <h1>Bienvenido a <span>ShowX</span> 🚀</h1>
     <p>Conecta ideas, personas y experiencias. Explora aplicaciones, películas y software de manera fácil y segura.</p>
-    <div class="hero-buttons">
+    <div>
       <a href="apk/" class="btn">Explorar APKs</a>
       <a href="peliculas/" class="btn">Explorar Películas</a>
       <a href="pc/" class="btn">Explorar PC</a>
@@ -49,57 +98,51 @@
 </section>
 
 <!-- === SUGERENCIAS === -->
-<section id="sugerencias" style="padding: 4rem 2rem; background-color: #f5f5f5;">
-  <div class="container">
-    <h2>Sugerencias para ti</h2>
-    <p>Explora nuestras recomendaciones más recientes:</p>
-    <div class="suggestions-grid">
-      <div class="suggestion-card">
-        <h3>Aplicación destacada</h3>
-        <p>Conoce la app más popular de esta semana con todas sus funciones y ventajas.</p>
-      </div>
-      <div class="suggestion-card">
-        <h3>Película recomendada</h3>
-        <p>Un film seleccionado especialmente para ti, con trailer y detalles.</p>
-      </div>
-      <div class="suggestion-card">
-        <h3>Programa para PC</h3>
-        <p>Herramientas y software útiles para mejorar tu experiencia en tu computadora.</p>
-      </div>
+<section id="sugerencias">
+  <h2>Sugerencias para ti</h2>
+  <p>Descubre nuestras recomendaciones más recientes:</p>
+  <div class="suggestions-grid">
+    <div class="suggestion-card">
+      <h3>Aplicación destacada</h3>
+      <p>Conoce la app más popular de esta semana con todas sus funciones y ventajas.</p>
+    </div>
+    <div class="suggestion-card">
+      <h3>Película recomendada</h3>
+      <p>Un film seleccionado especialmente para ti, con trailer y detalles.</p>
+    </div>
+    <div class="suggestion-card">
+      <h3>Programa para PC</h3>
+      <p>Herramientas y software útiles para mejorar tu experiencia en tu computadora.</p>
     </div>
   </div>
 </section>
 
 <!-- === NEWS SECTION === -->
 <section id="news">
-  <div class="container">
-    <h2>Últimas Noticias 📰</h2>
-    <p>Mantente actualizado con los anuncios y novedades.</p>
-    <div class="news-grid">
-      <div class="news-card">
-        <h3>Próximamente: Nuevas herramientas</h3>
-        <p>Estamos trabajando en herramientas para Android. ¡Mantente atento!</p>
-      </div>
-      <div class="news-card">
-        <h3>Actualización v2.0</h3>
-        <p>Versiones mejoradas de apps y programas con mayor rendimiento.</p>
-      </div>
+  <h2>Últimas Noticias 📰</h2>
+  <p>Mantente actualizado con anuncios y novedades.</p>
+  <div class="news-grid">
+    <div class="news-card">
+      <h3>Próximamente: Nuevas herramientas</h3>
+      <p>Estamos trabajando en herramientas para Android. ¡Mantente atento!</p>
+    </div>
+    <div class="news-card">
+      <h3>Actualización v2.0</h3>
+      <p>Versiones mejoradas de apps y programas con mayor rendimiento.</p>
     </div>
   </div>
 </section>
 
 <!-- === CONTACT SECTION === -->
 <section id="contact">
-  <div class="container">
-    <h2>Contáctanos 📬</h2>
-    <p>¿Tienes preguntas o sugerencias? Escríbenos.</p>
-    <form class="contact-form">
-      <input type="text" placeholder="Tu Nombre" required>
-      <input type="email" placeholder="Tu Email" required>
-      <textarea placeholder="Tu Mensaje" required></textarea>
-      <button type="submit" class="btn">Enviar Mensaje</button>
-    </form>
-  </div>
+  <h2>Contáctanos 📬</h2>
+  <p>¿Tienes preguntas o sugerencias? Escríbenos.</p>
+  <form class="contact-form">
+    <input type="text" placeholder="Tu Nombre" required>
+    <input type="email" placeholder="Tu Email" required>
+    <textarea placeholder="Tu Mensaje" required></textarea>
+    <button type="submit">Enviar Mensaje</button>
+  </form>
 </section>
 
 <!-- === FOOTER === -->
@@ -111,16 +154,11 @@
 <script>
   let lastScrollTop = 0;
   const navbar = document.querySelector("nav");
-  const scrollThreshold = 10;
-
   window.addEventListener("scroll", () => {
     const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-    if (Math.abs(currentScroll - lastScrollTop) > scrollThreshold) {
-      if (currentScroll > lastScrollTop) {
-        navbar.classList.add("shrink");
-      } else {
-        navbar.classList.remove("shrink");
-      }
+    if (Math.abs(currentScroll - lastScrollTop) > 10) {
+      if (currentScroll > lastScrollTop) { navbar.classList.add("shrink"); }
+      else { navbar.classList.remove("shrink"); }
       lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
     }
   });
