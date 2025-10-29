@@ -9,122 +9,122 @@
   <link rel="icon" href="LOGO.png" type="image/png">
   <link rel="stylesheet" href="style.css">
 
-  <style>
-    html {
-      scroll-behavior: smooth;
-    }
-
-    /* === NAVBAR CON EFECTO DE CONTRACCIÓN === */
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background-color: #111;
-      padding: 1.2rem 2rem;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      transition: all 0.3s ease;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
-    }
-
-    nav.shrink {
-      padding: 0.5rem 1.5rem;
-      background-color: rgba(17, 17, 17, 0.95);
-      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
-    }
-
-    nav .logo img {
-      height: 45px;
-      width: auto;
-      transition: height 0.3s ease;
-    }
-
-    nav.shrink .logo img {
-      height: 30px;
-    }
-
-    nav .menu {
-      display: flex;
-      gap: 2rem;
-    }
-
-    nav a {
-      color: #fff;
-      text-decoration: none;
-      font-weight: 600;
-      transition: color 0.3s;
-    }
-
-    nav a:hover {
-      color: #00d8ff;
-    }
-
-    /* === HERO PRINCIPAL === */
-    .hero {
-      min-height: 100vh;
-      background: linear-gradient(135deg, #0d1117, #1e293b);
-      color: white;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 4rem 2rem;
-    }
-
-    .hero h1 {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-    }
-
-    .hero p {
-      font-size: 1.2rem;
-      max-width: 700px;
-      line-height: 1.6;
-    }
-
-    footer {
-      background-color: #111;
-      color: #888;
-      text-align: center;
-      padding: 1.5rem;
-      font-size: 0.9rem;
-    }
-  </style>
-
+  <!-- HEADER (opcional) -->
   <script>
-    // === NAVBAR CONTRACCIÓN ===
-    window.addEventListener("scroll", () => {
-      const nav = document.querySelector("nav");
-      if (window.scrollY > 50) nav.classList.add("shrink");
-      else nav.classList.remove("shrink");
-    });
+    (function() {
+      let depth = window.location.pathname.split("/").length - 2;
+      let path = "./";
+      for (let i = 0; i < depth; i++) path += "../";
+      fetch(path + "header.html")
+        .then(res => res.ok ? res.text() : Promise.reject(res.status))
+        .then(html => document.head.insertAdjacentHTML("beforeend", html))
+        .catch(err => console.warn("No se pudo cargar header.html:", err));
+    })();
   </script>
 </head>
-
 <body>
-  <!-- === NAVIGATION === -->
-  <nav>
-    <a href="index.html" class="logo">
-      <img src="LOGO.png" alt="ShowX Logo">
-    </a>
-    <div class="menu">
-      <a href="apk/">APKS</a>
-      <a href="peliculas/">PELÍCULAS</a>
-      <a href="pc/">PC</a>
-      <a href="contacto/">CONTACTO</a>
-    </div>
-  </nav>
 
-  <!-- === HERO PRINCIPAL === -->
-  <section class="hero">
-    <h1>Bienvenido a ShowX</h1>
+<!-- === NAVIGATION === -->
+<nav>
+  <a href="#home" class="logo">
+    <img src="LOGO.png" alt="ShowX Logo">
+  </a>
+  <a href="#home">HOME</a>
+  <a href="#news">NEWS</a>
+  <a href="#contact">CONTACT</a>
+  <a href="#support">SUPPORT ME</a>
+</nav>
+
+<!-- === HERO SECTION === -->
+<section class="hero" style="background: url('BANNER.jpg') center/cover no-repeat;">
+  <div class="hero-content">
+    <h1>Bienvenido a <span>ShowX</span> 🚀</h1>
     <p>Conecta ideas, personas y experiencias. Explora aplicaciones, películas y software de manera fácil y segura.</p>
-  </section>
+    <div class="hero-buttons">
+      <a href="apk/" class="btn">Explorar APKs</a>
+      <a href="peliculas/" class="btn">Explorar Películas</a>
+      <a href="pc/" class="btn">Explorar PC</a>
+    </div>
+  </div>
+</section>
 
-  <footer>
-    © 2025 ShowX — Todos los derechos reservados.
-  </footer>
+<!-- === SUGERENCIAS === -->
+<section id="sugerencias" style="padding: 4rem 2rem; background-color: #f5f5f5;">
+  <div class="container">
+    <h2>Sugerencias para ti</h2>
+    <p>Explora nuestras recomendaciones más recientes:</p>
+    <div class="suggestions-grid">
+      <div class="suggestion-card">
+        <h3>Aplicación destacada</h3>
+        <p>Conoce la app más popular de esta semana con todas sus funciones y ventajas.</p>
+      </div>
+      <div class="suggestion-card">
+        <h3>Película recomendada</h3>
+        <p>Un film seleccionado especialmente para ti, con trailer y detalles.</p>
+      </div>
+      <div class="suggestion-card">
+        <h3>Programa para PC</h3>
+        <p>Herramientas y software útiles para mejorar tu experiencia en tu computadora.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- === NEWS SECTION === -->
+<section id="news">
+  <div class="container">
+    <h2>Últimas Noticias 📰</h2>
+    <p>Mantente actualizado con los anuncios y novedades.</p>
+    <div class="news-grid">
+      <div class="news-card">
+        <h3>Próximamente: Nuevas herramientas</h3>
+        <p>Estamos trabajando en herramientas para Android. ¡Mantente atento!</p>
+      </div>
+      <div class="news-card">
+        <h3>Actualización v2.0</h3>
+        <p>Versiones mejoradas de apps y programas con mayor rendimiento.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- === CONTACT SECTION === -->
+<section id="contact">
+  <div class="container">
+    <h2>Contáctanos 📬</h2>
+    <p>¿Tienes preguntas o sugerencias? Escríbenos.</p>
+    <form class="contact-form">
+      <input type="text" placeholder="Tu Nombre" required>
+      <input type="email" placeholder="Tu Email" required>
+      <textarea placeholder="Tu Mensaje" required></textarea>
+      <button type="submit" class="btn">Enviar Mensaje</button>
+    </form>
+  </div>
+</section>
+
+<!-- === FOOTER === -->
+<footer>
+  <p>&copy; 2025 ShowX. Todos los derechos reservados.</p>
+</footer>
+
+<!-- === JS NAVBAR SHRINK === -->
+<script>
+  let lastScrollTop = 0;
+  const navbar = document.querySelector("nav");
+  const scrollThreshold = 10;
+
+  window.addEventListener("scroll", () => {
+    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+    if (Math.abs(currentScroll - lastScrollTop) > scrollThreshold) {
+      if (currentScroll > lastScrollTop) {
+        navbar.classList.add("shrink");
+      } else {
+        navbar.classList.remove("shrink");
+      }
+      lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+    }
+  });
+</script>
+
 </body>
 </html>
