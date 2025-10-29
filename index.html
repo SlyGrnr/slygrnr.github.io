@@ -152,14 +152,13 @@
 
 <!-- === JS NAVBAR SHRINK === -->
 <script>
-  let lastScrollTop = 0;
   const navbar = document.querySelector("nav");
   window.addEventListener("scroll", () => {
-    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-    if (Math.abs(currentScroll - lastScrollTop) > 10) {
-      if (currentScroll > lastScrollTop) { navbar.classList.add("shrink"); }
-      else { navbar.classList.remove("shrink"); }
-      lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+    const scrollY = window.scrollY;
+    if (scrollY > 80) {
+      navbar.classList.add("shrink");
+    } else {
+      navbar.classList.remove("shrink");
     }
   });
 </script>
