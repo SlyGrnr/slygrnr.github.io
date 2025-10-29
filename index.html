@@ -1,258 +1,130 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="ShowX: Download Android APKs, tools, mods, and stay updated with the latest news.">
+  <meta name="description" content="ShowX: Connecting ideas, people, and experiences.">
   <title>ShowX - Connecting Ideas</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="icon" href="LOGO.png" type="image/png">
   <link rel="stylesheet" href="style.css">
-  <!-- PapaParse para parsear CSV -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
 
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
 
-  
-  <!-- HEADER -->
+    /* === NAVBAR CON EFECTO DE CONTRACCIÓN === */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #111;
+      padding: 1.2rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    }
+
+    nav.shrink {
+      padding: 0.5rem 1.5rem;
+      background-color: rgba(17, 17, 17, 0.95);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+    }
+
+    nav .logo img {
+      height: 45px;
+      width: auto;
+      transition: height 0.3s ease;
+    }
+
+    nav.shrink .logo img {
+      height: 30px;
+    }
+
+    nav .menu {
+      display: flex;
+      gap: 2rem;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #00d8ff;
+    }
+
+    /* === HERO PRINCIPAL === */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0d1117, #1e293b);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 4rem 2rem;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      line-height: 1.6;
+    }
+
+    footer {
+      background-color: #111;
+      color: #888;
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.9rem;
+    }
+  </style>
+
   <script>
-    // Detectar automáticamente la ruta correcta de header.html
-    (function() {
-      let depth = window.location.pathname.split("/").length - 2;
-      let path = "./";
-      for (let i = 0; i < depth; i++) path += "../";
-      fetch(path + "header.html")
-        .then(res => res.ok ? res.text() : Promise.reject(res.status))
-        .then(html => document.head.insertAdjacentHTML("beforeend", html))
-        .catch(err => console.warn("No se pudo cargar header.html:", err));
-    })();
+    // === NAVBAR CONTRACCIÓN ===
+    window.addEventListener("scroll", () => {
+      const nav = document.querySelector("nav");
+      if (window.scrollY > 50) nav.classList.add("shrink");
+      else nav.classList.remove("shrink");
+    });
   </script>
-
-
-  
-
-  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-<!-- === NAVIGATION === -->
-<nav>
-  <a href="#home" class="logo">
-    <img src="LOGO.png" alt="ShowX Logo">
-  </a>
-  <a href="#home">HOME</a>
-  <div class="dropdown">
-    <a href="#categorias" class="dropbtn" aria-label="Menú de categorías">CATEGORÍAS ▾</a>
-    <div class="dropdown-content">
-      <a href="#video">VIDEO</a>
-      <a href="#games">GAMES</a>
-      <a href="#modding">MOD</a>
+  <!-- === NAVIGATION === -->
+  <nav>
+    <a href="index.html" class="logo">
+      <img src="LOGO.png" alt="ShowX Logo">
+    </a>
+    <div class="menu">
+      <a href="apk/">APKS</a>
+      <a href="peliculas/">PELÍCULAS</a>
+      <a href="pc/">PC</a>
+      <a href="contacto/">CONTACTO</a>
     </div>
-  </div>
-  <a href="#news">NEWS</a>
-  <a href="#contact">CONTACT</a>
-  <a href="#support">SUPPORT ME</a>
-</nav>
+  </nav>
 
-<!-- === HERO SECTION === -->
-<header id="home" class="hero">
-  <div class="hero-content">
-    <h1>Welcome to <span>ShowX</span> 🚀</h1>
-    <p>Connecting ideas, people, and experiences.</p>
-    <a href="#apks" class="btn">Explore APKs</a>
-  </div>
-</header>
+  <!-- === HERO PRINCIPAL === -->
+  <section class="hero">
+    <h1>Bienvenido a ShowX</h1>
+    <p>Conecta ideas, personas y experiencias. Explora aplicaciones, películas y software de manera fácil y segura.</p>
+  </section>
 
-<!-- === TYPES SECTION === -->
-<section id="apks">
-  <div class="container">
-    <h2>WELCOME 📱</h2>
-    <p>APKS, MODS, ISOS, PELICULAS, PROGRAMAS LINKS UTILES Y MAS.</p>
-  
-    <!-- === SEARCH BAR === -->
-    <div class="search-bar">
-      <input type="text" id="search-input" placeholder="Search..." aria-label="Search">
-    </div>
-  
-    <!-- === CATEGORY FILTERS === -->
-    <div class="WEB-filters">
-      <a href="https://slygrnr.github.io/apk" class="filter-btn" target="_blank">APK</a>
-      <button class="filter-btn" data-category="video">VIDEO</button>
-      <button class="filter-btn" data-category="games">GAMES</button>
-      <button class="filter-btn" data-category="modding">MOD</button>
-    </div>
-  
-    <!-- === APK GRID === -->
-    <div class="apk-grid" id="apk-grid" style="display: block;"></div>
-    <div id="error" style="display: none; color: red;">Error al cargar APKs</div>
-  </div>
-</section>
-
-<!-- === NEWS SECTION === -->
-<section id="news">
-  <div class="container">
-    <h2>Latest News 📰</h2>
-    <p>Stay updated with the latest announcements, APK releases, and tips for developers.</p>
-    <div class="news-grid">
-      <div class="news-card">
-        <h3>Coming Soon: New Tools</h3>
-        <p>We're working on exciting new tools for Android development. Stay tuned!</p>
-      </div>
-      <div class="news-card">
-        <h3>APK Update v2.0</h3>
-        <p>Updated versions of popular APKs with improved performance.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- === CONTACT SECTION === -->
-<section id="contact">
-  <div class="container">
-    <h2>Contact Us 📬</h2>
-    <p>Have questions or suggestions? Reach out to us!</p>
-    <form class="contact-form">
-      <input type="text" placeholder="Your Name" required>
-      <input type="email" placeholder="Your Email" required>
-      <textarea placeholder="Your Message" required></textarea>
-      <button type="submit" class="btn">Send Message</button>
-    </form>
-  </div>
-</section>
-
-<!-- === FOOTER === -->
-<footer>
-  <p>&copy; 2025 ShowX. All rights reserved.</p>
-</footer>
-
-<!-- === JS FILTER, SEARCH, AND DYNAMIC APKS === -->
-<script>
-  // Determinar categorías basadas en nombre y descripción
-  function getCategories(name, description) {
-    const lowerName = name.toLowerCase();
-    const lowerDesc = description.toLowerCase();
-    const categories = [];
-
-    if (lowerName.includes('capcut') || lowerDesc.includes('edición') || lowerDesc.includes('video')) {
-      categories.push('Edición de Video');
-    }
-    if (lowerName.includes('simulator') || lowerDesc.includes('juego') || lowerDesc.includes('game')) {
-      categories.push('Juego');
-    }
-    if (lowerName.includes('mod') || lowerDesc.includes('mod')) {
-      categories.push('Modding');
-    }
-
-    return categories.length > 0 ? categories : ['App'];
-  }
-
-  // Cargar datos desde Google Sheets (CSV)
-  async function loadApks() {
-    try {
-      Papa.parse('https://docs.google.com/spreadsheets/d/e/2PACX-1vTUbapksr6zWszFpUjeWR6jPS6QOA6OL7iuO4ew9gASwx5LLzR9o-bKbRXSLQv360GQBoINiSpdzIGf/pub?gid=1055416471&single=true&output=csv', {
-        download: true,
-        header: true,
-        complete: function(results) {
-          const apkGrid = document.getElementById('apk-grid');
-          apkGrid.innerHTML = ''; // Limpia el grid
-
-          results.data.forEach(row => {
-            const name = row.NOMBRE || 'Sin nombre';
-            const description = row.Descripción || 'Sin descripción';
-            const url = row.URL_Descarga || '#';
-            const image = row.URL_Imagen || 'https://img.freepik.com/vector-premium/icono-android-icono-relleno-negro_1076610-103538.jpg?semt=ais_hybrid&w=740&q=80';
-            const rating = row.Calificación || '3.8';
-
-            // Obtener categorías dinámicamente
-            const categories = getCategories(name, description);
-            const categoryData = categories.map(c => c.toLowerCase().replace(/ /g, '')).join(' ');
-            const tags = categories.map(tag => `<span class="tag">${tag}</span>`).join('');
-
-            const apkCard = document.createElement('div');
-            apkCard.className = 'apk-card';
-            apkCard.dataset.category = categoryData;
-            apkCard.innerHTML = `
-              <img src="${image}" alt="${name} icon">
-              <div class="apk-tags">${tags}</div>
-              <h3>${name}</h3>
-              <p>${description}</p>
-              <div class="apk-rating">⭐ ${rating}</div>
-              <a href="${url}" target="_blank" class="btn" tabindex="0">DOWNLOAD</a>
-            `;
-            apkGrid.appendChild(apkCard);
-          });
-        },
-        error: function(err) {
-          console.error('Error parsing CSV:', err);
-          document.getElementById('error').style.display = 'block';
-        }
-      });
-    } catch (err) {
-      console.error('Error loading APKs:', err);
-      document.getElementById('error').style.display = 'block';
-    }
-  }
-
-  // Llamar a la función al cargar la página
-  loadApks();
-
-  // Filtrado por categoría
-  const filterButtons = document.querySelectorAll('.filter-btn');
-  const apkGrid = document.getElementById('apk-grid');
-
-  filterButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      filterButtons.forEach(btn => btn.classList.remove('active'));
-      button.classList.add('active');
-
-      const category = button.dataset.category;
-      const apkCards = apkGrid.querySelectorAll('.apk-card');
-
-      apkCards.forEach(card => {
-        const categories = card.dataset.category.split(' ');
-        card.style.display = category === 'all' || categories.includes(category) ? 'block' : 'none';
-      });
-    });
-  });
-
-  // Búsqueda en tiempo real
-  const searchInput = document.querySelector('#search-input');
-
-  searchInput.addEventListener('input', () => {
-    const searchTerm = searchInput.value.toLowerCase();
-    const apkCards = apkGrid.querySelectorAll('.apk-card');
-
-    apkCards.forEach(card => {
-      const title = card.querySelector('h3').textContent.toLowerCase();
-      const description = card.querySelector('p').textContent.toLowerCase();
-      const tags = card.querySelector('.apk-tags') ? card.querySelector('.apk-tags').textContent.toLowerCase() : '';
-      const rating = card.querySelector('.apk-rating') ? card.querySelector('.apk-rating').textContent.toLowerCase() : '';
-      const matchesSearch = title.includes(searchTerm) || description.includes(searchTerm) || tags.includes(searchTerm) || rating.includes(searchTerm);
-
-      card.style.display = matchesSearch ? 'block' : 'none';
-    });
-
-    if (searchTerm) {
-      filterButtons.forEach(btn => btn.classList.remove('active'));
-    }
-  });
-</script>
-  <script>
-  let lastScrollTop = 0;
-  const navbar = document.querySelector("nav");
-
-  window.addEventListener("scroll", function() {
-    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-
-    if (currentScroll > lastScrollTop && currentScroll > 80) {
-      // Bajando → contraer
-      navbar.classList.add("shrink");
-    } else {
-      // Subiendo → expandir
-      navbar.classList.remove("shrink");
-    }
-
-    lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
-  });
-</script>
-
+  <footer>
+    © 2025 ShowX — Todos los derechos reservados.
+  </footer>
 </body>
 </html>
