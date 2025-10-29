@@ -16,6 +16,12 @@
 </head>
 
 <body>
+
+  <!-- === LOGO CON ENLACE A HOME === -->
+  <a href="/#home" style="display:block; text-align:center; margin:20px 0;">
+    <img src="../LOGO.png" alt="ShowX Logo" style="width:100px; height:auto;">
+  </a>
+
   <!-- === SECCIÓN DE APLICACIONES === -->
   <section id="apks">
     <div class="container">
@@ -52,7 +58,6 @@
       const text = `${name} ${description}`.toLowerCase();
       const categories = [];
 
-      // --- Palabras clave por categoría ---
       const categoryKeywords = {
         video: ['video', 'capcut', 'edición', 'editor', 'cámara', 'reel', 'filmora', 'kinemaster', 'clips', 'vid', 'recorder'],
         games: ['game', 'juego', 'simulator', 'racing', 'battle', 'survival', 'adventure', 'puzzle', 'fight', 'quest', 'action'],
@@ -63,25 +68,21 @@
         social: ['chat', 'red social', 'messenger', 'whatsapp', 'instagram', 'facebook', 'tiktok', 'telegram']
       };
 
-      // --- Revisión automática ---
       for (const [category, keywords] of Object.entries(categoryKeywords)) {
         if (keywords.some(word => text.includes(word))) {
           categories.push(category);
         }
       }
 
-      // --- Categoría por defecto ---
       return categories.length ? categories : ['apk'];
     }
 
-    // === Mostrar todas las apps ===
     function showAllApks() {
       document.querySelectorAll('.apk-card').forEach(card => card.style.display = 'block');
       document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
       document.querySelector('[data-category="all"]').classList.add('active');
     }
 
-    // === Cargar datos desde Google Sheets (CSV) ===
     async function loadApks() {
       try {
         Papa.parse('https://docs.google.com/spreadsheets/d/e/2PACX-1vTUbapksr6zWszFpUjeWR6jPS6QOA6OL7iuO4ew9gASwx5LLzR9o-bKbRXSLQv360GQBoINiSpdzIGf/pub?gid=1055416471&single=true&output=csv', {
@@ -99,14 +100,12 @@
               const image = row.URL_Imagen || 'https://img.freepik.com/vector-premium/icono-android-icono-relleno-negro_1076610-103538.jpg?semt=ais_hybrid&w=740&q=80';
               const rating = row.Calificación || '3.8';
             
-              // 🔹 NUEVA URL LOCAL (basada en el nombre)
-              const formattedName = name.replace(/\s+/g, '%20'); // Ejemplo: "CapCut Video Editor" → "CapCut%Video%Editor"
+              const formattedName = name.replace(/\s+/g, '%20');
               const url = `https://slygrnr.github.io/apk/${formattedName}/`;
             
               const categories = getCategories(name, description);
               const categoryData = categories.join(' ');
             
-              // Crear tarjeta
               const card = document.createElement('div');
               card.className = 'apk-card';
               card.dataset.category = categoryData;
@@ -120,9 +119,8 @@
               fragment.appendChild(card);
             });
 
-
             apkGrid.appendChild(fragment);
-            showAllApks(); // Mostrar todo al inicio
+            showAllApks();
           },
           error: function(err) {
             console.error('Error al analizar CSV:', err);
@@ -135,7 +133,6 @@
       }
     }
 
-    // === Filtros de categoría ===
     document.addEventListener('click', e => {
       if (!e.target.classList.contains('filter-btn')) return;
 
@@ -151,7 +148,6 @@
       });
     });
 
-    // === Búsqueda dinámica ===
     document.addEventListener('input', e => {
       if (e.target.id !== 'search-input') return;
       const term = e.target.value.toLowerCase().trim();
@@ -166,7 +162,6 @@
       else document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
     });
 
-    // === Iniciar carga al abrir página ===
     window.addEventListener('DOMContentLoaded', loadApks);
   </script>
 </body>
