@@ -96,13 +96,16 @@
             results.data.forEach(row => {
               const name = row.NOMBRE?.trim() || 'Sin nombre';
               const description = row.Descripción?.trim() || 'Sin descripción';
-              const url = row.URL_Descarga || '#';
               const image = row.URL_Imagen || 'https://img.freepik.com/vector-premium/icono-android-icono-relleno-negro_1076610-103538.jpg?semt=ais_hybrid&w=740&q=80';
               const rating = row.Calificación || '3.8';
-
+            
+              // 🔹 NUEVA URL LOCAL (basada en el nombre)
+              const formattedName = name.replace(/\s+/g, '-').toLowerCase(); // Ejemplo: "CapCut Video Editor" → "capcut-video-editor"
+              const url = `https://slygrnr.github.io/apk/${formattedName}/`;
+            
               const categories = getCategories(name, description);
               const categoryData = categories.join(' ');
-
+            
               // Crear tarjeta
               const card = document.createElement('div');
               card.className = 'apk-card';
@@ -116,6 +119,7 @@
               `;
               fragment.appendChild(card);
             });
+
 
             apkGrid.appendChild(fragment);
             showAllApks(); // Mostrar todo al inicio
