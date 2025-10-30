@@ -1,185 +1,137 @@
 <!doctype html>
-<!-- Mock del inicio de sesión estilo Windows (UI de demostración, NO guarda contraseñas) -->
+<!-- Mock estilo pantalla de bloqueo de Windows — reemplaza background.jpg por tu imagen de fondo real -->
 <html lang="es">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Inicio de sesión — Mock Windows</title>
+  <title>Pantalla de bloqueo — Mock Windows</title>
   <style>
     :root{
-      --bg1:#0f172a; /* azul oscuro */
-      --bg2:#071029; /* más oscuro para degradado */
-      --card-bg: rgba(255,255,255,0.06);
-      --accent: #2b86ff;
-      --glass: rgba(255,255,255,0.06);
-      --text: rgba(255,255,255,0.92);
-      --muted: rgba(255,255,255,0.6);
+      --accent: rgba(255,255,255,0.9);
+      --muted: rgba(255,255,255,0.75);
+      --glass: rgba(0,0,0,0.35);
     }
     *{box-sizing:border-box}
-    html,body{height:100%;margin:0;font-family:Inter,Segoe UI,system-ui,Arial;}
+    html,body{height:100%;margin:0;font-family:Segoe UI,Inter,system-ui,Arial;color:var(--accent)}
 
-    /* Fondo similar a Windows: imagen + degradado sutil */
+    /* Fondo en pantalla completa — coloca una imagen llamada background.jpg en la misma carpeta */
     body{
-      background: radial-gradient(circle at 20% 10%, rgba(43,134,255,0.08), transparent 20%), linear-gradient(135deg,var(--bg1),var(--bg2));
-      color:var(--text);
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      display:flex;align-items:center;justify-content:center;
-      background-attachment:fixed;
+      background: center/cover no-repeat url('background.jpg');
+      display:flex;align-items:center;justify-content:center;overflow:hidden;
     }
 
-    /* Hero: tarjeta central */
-    .login-wrap{
-      width:100%;max-width:420px;padding:36px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
-      box-shadow: 0 10px 30px rgba(2,6,23,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
-      backdrop-filter: blur(6px) saturate(120%);
-      text-align:center;
+    /* Capa de oscurecimiento para ver elementos encima */
+    .overlay{position:fixed;inset:0;background:linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55));backdrop-filter:blur(2px);}
+
+    /* Contenedor central: avatar y cuadro de contraseña (transparente) */
+    .center{
+      position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:12px;width:min(900px,90%);
     }
 
-    .brand{
-      display:flex;align-items:center;gap:12px;justify-content:center;margin-bottom:18px;
+    .avatar-ring{
+      width:150px;height:150px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,0.08);border:3px solid rgba(255,255,255,0.12);
+      backdrop-filter:blur(6px);
     }
-    .logo{
-      width:46px;height:46px;border-radius:8px;background:linear-gradient(135deg,#2b86ff,#6dd3ff);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:20px;box-shadow:0 4px 18px rgba(43,134,255,0.14);
+    .avatar-ring svg{width:86px;height:86px;opacity:0.9}
+
+    /* Nombre de usuario grande y desenfocado (simula desenfoque) */
+    .username-wrap{margin-top:6px;text-align:center}
+    .username{font-size:28px;font-weight:600;color:var(--accent);filter:blur(3px);letter-spacing:1px}
+    .account-type{font-size:15px;color:var(--muted);margin-top:6px}
+
+    /* Caja de contraseña tipo barra con fondo semi-transparente y borde fino */
+    .pw-box{width:560px;max-width:92%;height:46px;border-radius:4px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.12);display:flex;align-items:center;padding:6px 8px;backdrop-filter:blur(4px)}
+    .pw-input{flex:1;height:34px;background:transparent;border:none;color:var(--accent);font-size:16px;padding:4px 8px;outline:none}
+    .pw-input::placeholder{color:rgba(255,255,255,0.5)}
+
+    .enter-btn{width:44px;height:34px;border-radius:3px;border:none;background:rgba(255,255,255,0.06);display:grid;place-items:center;cursor:pointer}
+    .enter-btn svg{width:18px;height:18px;opacity:0.95}
+
+    /* Lista de usuarios abajo a la izquierda (simula selección de cuentas) */
+    .user-list{position:fixed;left:18px;bottom:18px;z-index:3;display:flex;flex-direction:column;gap:8px}
+    .user-item{display:flex;align-items:center;gap:10px;background:rgba(0,0,0,0.45);padding:8px 12px;border-radius:6px;min-width:220px}
+    .user-thumb{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.06);display:grid;place-items:center}
+    .user-name{color:rgba(255,255,255,0.9);font-size:14px}
+    .user-email{font-size:12px;color:rgba(255,255,255,0.65)}
+
+    /* Pequeñas instrucciones inferiores */
+    .bottom-hint{position:fixed;right:18px;bottom:14px;color:rgba(255,255,255,0.6);font-size:13px}
+
+    @media (max-width:640px){
+      .avatar-ring{width:120px;height:120px}
+      .username{font-size:22px}
+      .pw-box{width:88%}
+      .user-item{min-width:170px}
     }
-    h1{font-size:18px;margin:0 0 6px}
-    p.subtitle{margin:0;color:var(--muted);font-size:13px}
-
-    .avatar{width:92px;height:92px;border-radius:50%;background:linear-gradient(180deg,#1f2937, #111827);display:inline-grid;place-items:center;margin:20px auto;border:3px solid rgba(255,255,255,0.06)}
-    .avatar img{width:78px;height:78px;border-radius:50%;object-fit:cover}
-
-    .username{font-size:16px;margin:8px 0;color:var(--text);font-weight:600}
-    .small{font-size:13px;color:var(--muted)}
-
-    .form{margin-top:14px}
-    .input-row{position:relative;margin:10px 0}
-    input[type="password"], input[type="text"]{
-      width:100%;padding:12px 40px 12px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:rgba(255,255,255,0.02);color:var(--text);font-size:15px;outline:none;transition:box-shadow .15s, border-color .15s
-    }
-    input:focus{box-shadow:0 4px 18px rgba(43,134,255,0.12);border-color:rgba(43,134,255,0.6)}
-    .eye-btn{position:absolute;right:8px;top:50%;transform:translateY(-50%);background:transparent;border:none;color:var(--muted);cursor:pointer;padding:6px;border-radius:6px}
-
-    .actions{display:flex;gap:8px;align-items:center;justify-content:center;margin-top:18px}
-    .btn{padding:10px 18px;border-radius:10px;border:none;background:var(--accent);color:white;font-weight:600;cursor:pointer;box-shadow:0 6px 18px rgba(43,134,255,0.18)}
-    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted);font-weight:600}
-
-    .help{margin-top:12px;color:var(--muted);font-size:13px}
-
-    .notice{margin-top:12px;font-size:13px;color:#f59e0b}
-
-    /* Footer small text */
-    .foot{margin-top:18px;font-size:12px;color:rgba(255,255,255,0.45)}
-
-    /* Responsive */
-    @media (max-width:460px){.login-wrap{margin:20px}} 
-
   </style>
 </head>
 <body>
-  <main class="login-wrap" role="main">
-    <div class="brand">
-      <div class="logo" aria-hidden>W</div>
-      <div style="text-align:left">
-        <h1>Windows — Inicio de sesión (mock)</h1>
-        <p class="subtitle">Pantalla de acceso simulada — solo demo</p>
+  <div class="overlay" aria-hidden></div>
+
+  <div class="center" role="main">
+    <div class="avatar-ring" aria-hidden>
+      <!-- icono usuario simple -->
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 12c2.761 0 5-2.239 5-5s-2.239-5-5-5-5 2.239-5 5 2.239 5 5 5z" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 21c0-3.866 3.134-7 7-7h4c3.866 0 7 3.134 7 7" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" opacity="0.95"/></svg>
+    </div>
+
+    <div class="username-wrap">
+      <!-- simular nombre desenfocado como en la captura -->
+      <div class="username">Nombre De Usuario</div>
+      <div class="account-type">Cuenta local</div>
+    </div>
+
+    <div class="pw-box" role="form" aria-label="Contraseña">
+      <input class="pw-input" id="password" type="password" placeholder="Contraseña" autocomplete="current-password">
+      <button class="enter-btn" id="enter" aria-label="Entrar">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12h14" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 5l7 7-7 7" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+
+  </div>
+
+  <!-- Lista de cuentas en la esquina inferior izquierda -->
+  <div class="user-list" aria-hidden>
+    <div class="user-item">
+      <div class="user-thumb">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="3" stroke="white" stroke-width="1.4"/><path d="M4 20c1-3 4-5 8-5s7 2 8 5" stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div>
+        <div class="user-name">Jhon</div>
+        <div class="user-email">jhon@example.com</div>
       </div>
     </div>
 
-    <div class="avatar" aria-hidden>
-      <!-- Avatar de ejemplo (puedes cambiar la URL) -->
-      <img src="https://i.pravatar.cc/150?img=12" alt="Avatar de usuario">
+    <div class="user-item">
+      <div class="user-thumb">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="3" stroke="white" stroke-width="1.4"/><path d="M4 20c1-3 4-5 8-5s7 2 8 5" stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div>
+        <div class="user-name">otro.usuario</div>
+        <div class="user-email">otro@ejemplo.com</div>
+      </div>
     </div>
+  </div>
 
-    <div class="username">Jhon</div>
-    <div class="small">Cuenta de usuario local</div>
-
-    <form class="form" id="loginForm" onsubmit="return false;">
-      <div class="input-row">
-        <label for="password" class="sr-only">Contraseña</label>
-        <input id="password" type="password" placeholder="Contraseña" aria-label="Contraseña" autocomplete="current-password">
-        <button class="eye-btn" id="toggle" title="Mostrar/ocultar contraseña" aria-pressed="false">👁️</button>
-      </div>
-
-      <div class="actions">
-        <button id="signin" class="btn">Iniciar sesión</button>
-        <button id="other" class="btn ghost" type="button">Cambiar usuario</button>
-      </div>
-
-      <div class="help">
-        <a href="#" id="forgot" style="color:var(--muted);text-decoration:underline;">¿Olvidaste la contraseña?</a>
-      </div>
-
-      <div class="notice" id="notice" role="status" aria-live="polite" style="display:none;"></div>
-
-    </form>
-
-    <div class="foot">Este es un ejemplo visual. No envía ni almacena contraseñas.</div>
-  </main>
+  <div class="bottom-hint">Accede con tu contraseña</div>
 
   <script>
-    // JavaScript pequeño para interacción: mostrar/ocultar contraseña y respuesta simulada.
+    // Interacciones simples: presionar Enter o clic en flecha "entra" y muestra aviso simulado
     (function(){
       const pwd = document.getElementById('password');
-      const toggle = document.getElementById('toggle');
-      const signin = document.getElementById('signin');
-      const notice = document.getElementById('notice');
-      const other = document.getElementById('other');
-      const forgot = document.getElementById('forgot');
+      const enter = document.getElementById('enter');
 
-      toggle.addEventListener('click', (e)=>{
-        e.preventDefault();
-        const isPwd = pwd.type === 'password';
-        pwd.type = isPwd ? 'text' : 'password';
-        toggle.setAttribute('aria-pressed', isPwd ? 'true' : 'false');
-        toggle.textContent = isPwd ? '🙈' : '👁️';
-      });
-
-      // Simulación simple: cualquier contraseña con longitud >=4 "accede"; no se guarda nada
-      signin.addEventListener('click', (e)=>{
-        e.preventDefault();
-        const val = pwd.value.trim();
-        notice.style.display='none';
-        if(!val){
-          notice.style.display='block';
-          notice.textContent='Introduce la contraseña.';
+      function simulateLogin(){
+        if(!pwd.value.trim()){
+          pwd.placeholder = 'Escribe la contraseña';
+          pwd.focus();
           return;
         }
-        if(val.length < 4){
-          notice.style.display='block';
-          notice.textContent='Contraseña demasiado corta.';
-          return;
-        }
-        // Simular verificación
-        notice.style.display='block';
-        notice.style.color = '#10b981'; // verde
-        notice.textContent = 'Accediendo... (simulado)';
+        enter.innerHTML = '⏳';
+        setTimeout(()=>{ enter.innerHTML = '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12h14" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 5l7 7-7 7" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>'; alert('Acceso simulado: Bienvenido'); },900);
+      }
 
-        // Efecto breve antes de mostrar exito
-        setTimeout(()=>{
-          notice.textContent = '¡Bienvenido, Jhon! (simulación)';
-        },900);
-      });
-
-      other.addEventListener('click', ()=>{
-        // Reinicia formulario para "cambiar usuario"
-        pwd.value='';
-        notice.style.display='block';
-        notice.style.color = '#f59e0b';
-        notice.textContent='Selecciona otro usuario (simulado).';
-      });
-
-      forgot.addEventListener('click', (e)=>{
-        e.preventDefault();
-        notice.style.display='block';
-        notice.style.color = '#f59e0b';
-        notice.textContent='Proceso de recuperación (simulado).';
-      });
-
-      // accesibilidad: submit con Enter
-      pwd.addEventListener('keydown', (e)=>{
-        if(e.key === 'Enter') signin.click();
-      });
-
+      enter.addEventListener('click', simulateLogin);
+      pwd.addEventListener('keydown', (e)=>{ if(e.key==='Enter') simulateLogin(); });
     })();
   </script>
 </body>
