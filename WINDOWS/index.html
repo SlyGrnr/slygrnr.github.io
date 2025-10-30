@@ -102,6 +102,13 @@
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12h14" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 5l7 7-7 7" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
     </div>
+    
+    <div class="pw-box" role="form" aria-label="Contraseña">
+      <input class="pw-input" id="password" type="password" placeholder="Contraseña" autocomplete="current-password">
+      <button class="enter-btn" id="enter" aria-label="Entrar">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12h14" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 5l7 7-7 7" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
 
   </div>
 
@@ -138,7 +145,6 @@
 
       function simulateLogin(){
         if(!pwd.value.trim()){
-          pwd.placeholder = 'Escribe la contraseña';
           pwd.placeholder = 'Escribe la contraseña';
           pwd.focus();
           return;
