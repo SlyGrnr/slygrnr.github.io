@@ -102,6 +102,28 @@
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12h14" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 5l7 7-7 7" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
     </div>
+    <script>
+      document.getElementById("enter").addEventListener("click", function() {
+        const question = document.getElementById("password").value.trim();
+      
+        if (question !== "") {
+          console.log("Respuesta capturada:", question);
+      
+          // Aquí puedes hacer lo que quieras con la respuesta, por ejemplo:
+          // guardarla en una lista
+          // enviarla a un servidor
+          // mostrarla en pantalla
+      
+          // Ejemplo: mostrar en la página
+          const p = document.createElement("p");
+          p.textContent = "Respuesta: " + password;
+          document.body.appendChild(p);
+      
+          // Limpiar el campo
+          document.getElementById("password").value = "";
+        }
+      });
+      </script>
 
   </div>
 
