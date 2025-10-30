@@ -23,7 +23,7 @@
     /* Capa de oscurecimiento para ver elementos encima */
     .overlay{position:fixed;inset:0;background:linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55));backdrop-filter:blur(2px);}
 
-    /* Contenedor central: avatar y cuadro de contraseña (transparente) */
+    /* Contenedor central: avatar y cuadro de Respuesta (transparente) */
     .center{
       position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:12px;width:min(900px,90%);
     }
@@ -55,7 +55,7 @@
     }
 
 
-    /* Caja de contraseña tipo barra con fondo semi-transparente y borde fino */
+    /* Caja de Respuesta tipo barra con fondo semi-transparente y borde fino */
     .pw-box{width:560px;max-width:92%;height:46px;border-radius:4px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.12);display:flex;align-items:center;padding:6px 8px;backdrop-filter:blur(4px)}
     .pw-input{flex:1;height:34px;background:transparent;border:none;color:var(--accent);font-size:16px;padding:4px 8px;outline:none}
     .pw-input::placeholder{color:rgba(255,255,255,0.5)}
@@ -95,19 +95,40 @@
       <div class="username">Jairo Jesus Ortega Ramirez</div>
       <div class="account-type">Cuenta local</div>
     </div>
+     // Contraseña--Respuesta password--answer 
+    <!-- Tu formulario -->
+    <form id="myForm">
+      <div class="pw-box" role="form" aria-label="Respuesta">
+        <input class="pw-input" id="answer" type="text" placeholder="Escribe una respuesta" required>
+        <button class="enter-btn" id="enter" type="submit" aria-label="Enviar">Enviar</button>
+      </div>
+    </form>
+  
+    <!-- 🔽 Aquí va el script -->
+    <script>
+      document.getElementById("myForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+  
+        const answer = document.getElementById("answer").value.trim();
+  
+        if (answer !== "") {
+          console.log("Respuesta capturada:", answer);
+  
+          const p = document.createElement("p");
+          p.textContent = "Respuesta: " + answer;
+          document.body.appendChild(p);
+  
+          document.getElementById("answer").value = "";
+        }
+      });
+    </script>
     
-    <div class="pw-box" role="form" aria-label="Contraseña">
-      <input class="pw-input" id="password" type="password" placeholder="Contraseña" autocomplete="current-password">
-      <button class="enter-btn" id="enter" aria-label="Entrar">
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12h14" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 5l7 7-7 7" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </button>
-    </div>
     <script>
       document.getElementById("enter").addEventListener("click", function() {
-        const password = document.getElementById("password").value.trim();
+        const answer = document.getElementById("answer").value.trim();
       
-        if (password !== "") {
-          console.log("Respuesta capturada:", password);
+        if (answer !== "") {
+          console.log("Respuesta capturada:", answer);
       
           // Aquí puedes hacer lo que quieras con la respuesta, por ejemplo:
           // guardarla en una lista
@@ -116,11 +137,11 @@
       
           // Ejemplo: mostrar en la página
           const p = document.createElement("p");
-          p.textContent = "Respuesta: " + password;
+          p.textContent = "Respuesta: " + answer;
           document.body.appendChild(p);
       
           // Limpiar el campo
-          document.getElementById("password").value = "";
+          document.getElementById("answer").value = "";
         }
       });
       </script>
@@ -149,17 +170,17 @@
     </div>
   </div>
 
-  <div class="bottom-hint">Accede con tu contraseña</div>
+  <div class="bottom-hint">Accede con tu Respuesta</div>
 
   <script>
     // Interacciones simples: presionar Enter o clic en flecha "entra" y muestra aviso simulado
     (function(){
-      const pwd = document.getElementById('password');
+      const pwd = document.getElementById('answer');
       const enter = document.getElementById('enter');
 
       function simulateLogin(){
         if(!pwd.value.trim()){
-          pwd.placeholder = 'Escribe la contraseña';
+          pwd.placeholder = 'Escribe la Respuesta';
           pwd.focus();
           return;
         }
