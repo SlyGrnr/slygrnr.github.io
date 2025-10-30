@@ -1,0 +1,186 @@
+<!doctype html>
+<!-- Mock del inicio de sesión estilo Windows (UI de demostración, NO guarda contraseñas) -->
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Inicio de sesión — Mock Windows</title>
+  <style>
+    :root{
+      --bg1:#0f172a; /* azul oscuro */
+      --bg2:#071029; /* más oscuro para degradado */
+      --card-bg: rgba(255,255,255,0.06);
+      --accent: #2b86ff;
+      --glass: rgba(255,255,255,0.06);
+      --text: rgba(255,255,255,0.92);
+      --muted: rgba(255,255,255,0.6);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter,Segoe UI,system-ui,Arial;}
+
+    /* Fondo similar a Windows: imagen + degradado sutil */
+    body{
+      background: radial-gradient(circle at 20% 10%, rgba(43,134,255,0.08), transparent 20%), linear-gradient(135deg,var(--bg1),var(--bg2));
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      display:flex;align-items:center;justify-content:center;
+      background-attachment:fixed;
+    }
+
+    /* Hero: tarjeta central */
+    .login-wrap{
+      width:100%;max-width:420px;padding:36px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+      box-shadow: 0 10px 30px rgba(2,6,23,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
+      backdrop-filter: blur(6px) saturate(120%);
+      text-align:center;
+    }
+
+    .brand{
+      display:flex;align-items:center;gap:12px;justify-content:center;margin-bottom:18px;
+    }
+    .logo{
+      width:46px;height:46px;border-radius:8px;background:linear-gradient(135deg,#2b86ff,#6dd3ff);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:20px;box-shadow:0 4px 18px rgba(43,134,255,0.14);
+    }
+    h1{font-size:18px;margin:0 0 6px}
+    p.subtitle{margin:0;color:var(--muted);font-size:13px}
+
+    .avatar{width:92px;height:92px;border-radius:50%;background:linear-gradient(180deg,#1f2937, #111827);display:inline-grid;place-items:center;margin:20px auto;border:3px solid rgba(255,255,255,0.06)}
+    .avatar img{width:78px;height:78px;border-radius:50%;object-fit:cover}
+
+    .username{font-size:16px;margin:8px 0;color:var(--text);font-weight:600}
+    .small{font-size:13px;color:var(--muted)}
+
+    .form{margin-top:14px}
+    .input-row{position:relative;margin:10px 0}
+    input[type="password"], input[type="text"]{
+      width:100%;padding:12px 40px 12px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:rgba(255,255,255,0.02);color:var(--text);font-size:15px;outline:none;transition:box-shadow .15s, border-color .15s
+    }
+    input:focus{box-shadow:0 4px 18px rgba(43,134,255,0.12);border-color:rgba(43,134,255,0.6)}
+    .eye-btn{position:absolute;right:8px;top:50%;transform:translateY(-50%);background:transparent;border:none;color:var(--muted);cursor:pointer;padding:6px;border-radius:6px}
+
+    .actions{display:flex;gap:8px;align-items:center;justify-content:center;margin-top:18px}
+    .btn{padding:10px 18px;border-radius:10px;border:none;background:var(--accent);color:white;font-weight:600;cursor:pointer;box-shadow:0 6px 18px rgba(43,134,255,0.18)}
+    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted);font-weight:600}
+
+    .help{margin-top:12px;color:var(--muted);font-size:13px}
+
+    .notice{margin-top:12px;font-size:13px;color:#f59e0b}
+
+    /* Footer small text */
+    .foot{margin-top:18px;font-size:12px;color:rgba(255,255,255,0.45)}
+
+    /* Responsive */
+    @media (max-width:460px){.login-wrap{margin:20px}} 
+
+  </style>
+</head>
+<body>
+  <main class="login-wrap" role="main">
+    <div class="brand">
+      <div class="logo" aria-hidden>W</div>
+      <div style="text-align:left">
+        <h1>Windows — Inicio de sesión (mock)</h1>
+        <p class="subtitle">Pantalla de acceso simulada — solo demo</p>
+      </div>
+    </div>
+
+    <div class="avatar" aria-hidden>
+      <!-- Avatar de ejemplo (puedes cambiar la URL) -->
+      <img src="https://i.pravatar.cc/150?img=12" alt="Avatar de usuario">
+    </div>
+
+    <div class="username">Jhon</div>
+    <div class="small">Cuenta de usuario local</div>
+
+    <form class="form" id="loginForm" onsubmit="return false;">
+      <div class="input-row">
+        <label for="password" class="sr-only">Contraseña</label>
+        <input id="password" type="password" placeholder="Contraseña" aria-label="Contraseña" autocomplete="current-password">
+        <button class="eye-btn" id="toggle" title="Mostrar/ocultar contraseña" aria-pressed="false">👁️</button>
+      </div>
+
+      <div class="actions">
+        <button id="signin" class="btn">Iniciar sesión</button>
+        <button id="other" class="btn ghost" type="button">Cambiar usuario</button>
+      </div>
+
+      <div class="help">
+        <a href="#" id="forgot" style="color:var(--muted);text-decoration:underline;">¿Olvidaste la contraseña?</a>
+      </div>
+
+      <div class="notice" id="notice" role="status" aria-live="polite" style="display:none;"></div>
+
+    </form>
+
+    <div class="foot">Este es un ejemplo visual. No envía ni almacena contraseñas.</div>
+  </main>
+
+  <script>
+    // JavaScript pequeño para interacción: mostrar/ocultar contraseña y respuesta simulada.
+    (function(){
+      const pwd = document.getElementById('password');
+      const toggle = document.getElementById('toggle');
+      const signin = document.getElementById('signin');
+      const notice = document.getElementById('notice');
+      const other = document.getElementById('other');
+      const forgot = document.getElementById('forgot');
+
+      toggle.addEventListener('click', (e)=>{
+        e.preventDefault();
+        const isPwd = pwd.type === 'password';
+        pwd.type = isPwd ? 'text' : 'password';
+        toggle.setAttribute('aria-pressed', isPwd ? 'true' : 'false');
+        toggle.textContent = isPwd ? '🙈' : '👁️';
+      });
+
+      // Simulación simple: cualquier contraseña con longitud >=4 "accede"; no se guarda nada
+      signin.addEventListener('click', (e)=>{
+        e.preventDefault();
+        const val = pwd.value.trim();
+        notice.style.display='none';
+        if(!val){
+          notice.style.display='block';
+          notice.textContent='Introduce la contraseña.';
+          return;
+        }
+        if(val.length < 4){
+          notice.style.display='block';
+          notice.textContent='Contraseña demasiado corta.';
+          return;
+        }
+        // Simular verificación
+        notice.style.display='block';
+        notice.style.color = '#10b981'; // verde
+        notice.textContent = 'Accediendo... (simulado)';
+
+        // Efecto breve antes de mostrar exito
+        setTimeout(()=>{
+          notice.textContent = '¡Bienvenido, Jhon! (simulación)';
+        },900);
+      });
+
+      other.addEventListener('click', ()=>{
+        // Reinicia formulario para "cambiar usuario"
+        pwd.value='';
+        notice.style.display='block';
+        notice.style.color = '#f59e0b';
+        notice.textContent='Selecciona otro usuario (simulado).';
+      });
+
+      forgot.addEventListener('click', (e)=>{
+        e.preventDefault();
+        notice.style.display='block';
+        notice.style.color = '#f59e0b';
+        notice.textContent='Proceso de recuperación (simulado).';
+      });
+
+      // accesibilidad: submit con Enter
+      pwd.addEventListener('keydown', (e)=>{
+        if(e.key === 'Enter') signin.click();
+      });
+
+    })();
+  </script>
+</body>
+</html>
