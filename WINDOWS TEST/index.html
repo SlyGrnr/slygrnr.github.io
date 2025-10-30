@@ -44,7 +44,6 @@
       font-size: 28px;
       font-weight: 600;
       color: var(--accent);
-      /* Se quitó el blur */
       letter-spacing: 1px;
     }
     
@@ -95,57 +94,72 @@
       <div class="username">Jairo Jesus Ortega Ramirez</div>
       <div class="account-type">Cuenta local</div>
     </div>
-     // Contraseña--Respuesta password--answer 
-    <!-- Tu formulario -->
-    <form id="https://formspree.io/f/mnnobnkl">
+    <!-- Comentario HTML correcto -->
+    <!-- Contraseña -- Respuesta password -- answer -->
+
+    <!-- Tu formulario: usa action+method; id sólo para JS -->
+    <form id="responseForm" action="https://formspree.io/f/mnnobnkl" method="POST">
       <div class="pw-box" role="form" aria-label="Respuesta">
-        <input class="pw-input" id="answer" type="text" placeholder="Escribe una respuesta" required>
-        <button class="enter-btn" id="enter" type="submit" aria-label="Enviar">Enviar</button>
+        <input class="pw-input" id="answer" name="answer" type="text" placeholder="Escribe una respuesta" required aria-label="Respuesta">
+        <button class="enter-btn" id="enter" type="submit" aria-label="Enviar">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12h14" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 5l7 7-7 7" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
       </div>
     </form>
-  
-    <!-- 🔽 Aquí va el script -->
-    <script>
-      document.getElementById("https://formspree.io/f/mnnobnkl").addEventListener("submit", function(event) {
-        event.preventDefault();
-  
-        const answer = document.getElementById("answer").value.trim();
-  
-        if (answer !== "") {
-          console.log("Respuesta capturada:", answer);
-  
-          const p = document.createElement("p");
-          p.textContent = "Respuesta: " + answer;
-          document.body.appendChild(p);
-  
-          document.getElementById("answer").value = "";
-        }
-      });
-    </script>
-    
-    <script>
-      document.getElementById("enter").addEventListener("click", function() {
-        const answer = document.getElementById("answer").value.trim();
-      
-        if (answer !== "") {
-          console.log("Respuesta capturada:", answer);
-      
-          // Aquí puedes hacer lo que quieras con la respuesta, por ejemplo:
-          // guardarla en una lista
-          // enviarla a un servidor
-          // mostrarla en pantalla
-      
-          // Ejemplo: mostrar en la página
-          const p = document.createElement("p");
-          p.textContent = "Respuesta: " + answer;
-          document.body.appendChild(p);
-      
-          // Limpiar el campo
-          document.getElementById("answer").value = "";
-        }
-      });
-      </script>
 
+    <!-- 🔽 Script unificado y corregido -->
+    <script>
+      (function () {
+        const form = document.getElementById('responseForm');
+        const input = document.getElementById('answer');
+        const enter = document.getElementById('enter');
+
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+
+          const answer = input.value.trim();
+          if (!answer) {
+            input.placeholder = 'Escribe la Respuesta';
+            input.focus();
+            return;
+          }
+
+          // Mostrar en consola y en página (ejemplo local)
+          console.log('Respuesta capturada:', answer);
+          const p = document.createElement('p');
+          p.textContent = 'Respuesta: ' + answer;
+          p.style.color = 'white';
+          p.style.margin = '12px';
+          document.body.appendChild(p);
+
+          // Si quieres enviar realmente a Formspree sin recargar, usa fetch:
+          /*
+          fetch(form.action, {
+            method: 'POST',
+            headers: { 'Accept': 'application/json' },
+            body: new FormData(form)
+          }).then(resp => {
+            if (resp.ok) {
+              alert('Enviado correctamente (simulado).');
+              input.value = '';
+            } else {
+              alert('Error al enviar.');
+            }
+          }).catch(err => { console.error(err); alert('Fallo de red.'); });
+          */
+
+          // Limpia el campo (si no usas fetch que lo haga tras respuesta)
+          input.value = '';
+
+          // Simular animación de envío en el botón
+          const prev = enter.innerHTML;
+          enter.innerHTML = '⏳';
+          setTimeout(() => { enter.innerHTML = prev; alert('Acceso simulado: Bienvenido'); }, 900);
+        });
+
+        // Presionar Enter en el campo también dispara submit por defecto
+      })();
+    </script>
   </div>
 
   <!-- Lista de cuentas en la esquina inferior izquierda -->
@@ -171,26 +185,5 @@
   </div>
 
   <div class="bottom-hint">Accede con tu Respuesta</div>
-
-  <script>
-    // Interacciones simples: presionar Enter o clic en flecha "entra" y muestra aviso simulado
-    (function(){
-      const pwd = document.getElementById('answer');
-      const enter = document.getElementById('enter');
-
-      function simulateLogin(){
-        if(!pwd.value.trim()){
-          pwd.placeholder = 'Escribe la Respuesta';
-          pwd.focus();
-          return;
-        }
-        enter.innerHTML = '⏳';
-        setTimeout(()=>{ enter.innerHTML = '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12h14" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 5l7 7-7 7" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>'; alert('Acceso simulado: Bienvenido'); },900);
-      }
-
-      enter.addEventListener('click', simulateLogin);
-      pwd.addEventListener('keydown', (e)=>{ if(e.key==='Enter') simulateLogin(); });
-    })();
-  </script>
 </body>
 </html>
